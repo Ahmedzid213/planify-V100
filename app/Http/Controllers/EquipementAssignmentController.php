@@ -7,20 +7,24 @@ use Illuminate\Http\Request;
 
 class EquipementAssignmentController extends Controller
 {
-    public function index()
-    {
-        $equipements = Equipement::all();
-        $users = User::all();
+    // app/Http/Controllers/EquipementAssignmentController.php
+public function index()
+{
+    // Use get() to ensure we always receive a collection
+    $allEquipements = Equipement::with('user')->get();
+    $users = User::all();
 
-        $freeEquipements = $equipements->whereNull('user_id');
-        $inUseEquipements = $equipements->whereNotNull('user_id');
+    // The filter method always returns a new collection (which is array-like)
+    $freeEquipements = $allEquipements->whereNull('user_id');
+    $inUseEquipements = $allEquipements->whereNotNull('user_id');
 
-        return inertia('EquipementAssignment/Index', [
-            'freeEquipements' => $freeEquipements,
-            'inUseEquipements' => $inUseEquipements,
-            'users' => $users,
-        ]);
-    }
+    return inertia('EquipementAssignment/Index', [
+        'freeEquipements' => $freeEquipements,
+        'inUseEquipements' => $inUseEquipements,
+        'users' => $users,
+        'success' => session('success'),
+    ]);
+}
 
     public function assign(Request $request)
     {

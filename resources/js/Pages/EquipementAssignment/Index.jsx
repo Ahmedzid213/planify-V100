@@ -46,7 +46,7 @@ export default function Index({
                       onChange={(e) => setData("equipement_id", e.target.value)}
                     >
                       <option value="">Select Equipement</option>
-                      {freeEquipements.map((equipement) => (
+                      {Object.values(freeEquipements).map((equipement) => (
                         <option key={equipement.id} value={equipement.id}>
                           {equipement.name}
                         </option>
@@ -96,7 +96,7 @@ export default function Index({
                   </tr>
                 </thead>
                 <tbody>
-                  {inUseEquipements.map((equipement) => (
+                  {Object.values(inUseEquipements).map((equipement) => (
                     <tr key={equipement.id}>
                       <td className="px-3 py-2">{equipement.name}</td>
                       <td className="px-3 py-2">
