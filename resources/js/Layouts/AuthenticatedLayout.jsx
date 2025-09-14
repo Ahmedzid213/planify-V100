@@ -16,9 +16,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="shrink-0 flex items-center">
-                <Link href={route('dashboard')}>
-  <img src="/images/logo.jpg" alt="App Logo" className="h-10 w-auto" />
-</Link>
+                <Link href={route("dashboard")}>
+                  <img
+                    src="/images/logo.jpg"
+                    alt="App Logo"
+                    className="h-10 w-auto"
+                  />
+                </Link>
               </div>
 
               <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -51,6 +55,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   active={route().current("task.myTasks")}
                 >
                   My Tasks
+                </NavLink>
+
+                <NavLink
+                  href={route("equipement.index")}
+                  active={route().current("equipement.index")}
+                >
+                  Equipements
                 </NavLink>
               </div>
             </div>
