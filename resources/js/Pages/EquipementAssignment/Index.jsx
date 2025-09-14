@@ -42,7 +42,7 @@ export default function Index({
                     <select
                       name="equipement_id"
                       id="equipement_id"
-                      className="mt-1 block w-full"
+                      className="mt-1 block w-full dark:bg-gray-900 dark:text-gray-300"
                       onChange={(e) => setData("equipement_id", e.target.value)}
                     >
                       <option value="">Select Equipement</option>
@@ -60,7 +60,7 @@ export default function Index({
                     <select
                       name="user_id"
                       id="user_id"
-                      className="mt-1 block w-full"
+                      className="mt-1 block w-full dark:bg-gray-900 dark:text-gray-300"
                       onChange={(e) => setData("user_id", e.target.value)}
                     >
                       <option value="">Select User</option>
