@@ -25,7 +25,8 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 </Link>
               </div>
 
-              <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+              {/* NAV LINKS SECTION: Corrected structure and classes */}
+              <div className="hidden sm:ms-10 sm:flex sm:items-center sm:gap-8">
                 <NavLink
                   href={route("dashboard")}
                   active={route().current("dashboard")}
@@ -56,7 +57,6 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 >
                   My Tasks
                 </NavLink>
-
                 <NavLink
                   href={route("equipement.index")}
                   active={route().current("equipement.index")}
@@ -69,13 +69,19 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 >
                   Equipement Assignment
                 </NavLink>
+                <NavLink
+                  href={route("notifications.index")}
+                  active={route().current("notifications.index")}
+                >
+                  Notifications
+                </NavLink>
+                <NavLink
+                  href={route("about")}
+                  active={route().current("about")}
+                >
+                  About Us
+                </NavLink>
               </div>
-              <NavLink
-                href={route("notifications.index")}
-                active={route().current("notifications.index")}
-              >
-                Notifications
-              </NavLink>
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">
@@ -88,7 +94,6 @@ export default function AuthenticatedLayout({ user, header, children }) {
                         className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
                       >
                         {user.name}
-
                         <svg
                           className="ms-2 -me-0.5 h-4 w-4"
                           xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +109,6 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       </button>
                     </span>
                   </Dropdown.Trigger>
-
                   <Dropdown.Content>
                     <Dropdown.Link href={route("profile.edit")}>
                       Profile
@@ -173,7 +177,6 @@ export default function AuthenticatedLayout({ user, header, children }) {
               Dashboard
             </ResponsiveNavLink>
           </div>
-
           <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div className="px-4">
               <div className="font-medium text-base text-gray-800 dark:text-gray-200">
@@ -183,7 +186,6 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 {user.email}
               </div>
             </div>
-
             <div className="mt-3 space-y-1">
               <ResponsiveNavLink href={route("profile.edit")}>
                 Profile

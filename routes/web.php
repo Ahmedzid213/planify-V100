@@ -12,6 +12,9 @@ use App\Http\Controllers\EquipementAssignmentController;
 use Inertia\Inertia;
 
 Route::redirect('/', '/dashboard');
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])
