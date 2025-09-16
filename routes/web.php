@@ -32,5 +32,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('equipement', EquipementController::class);
 Route::get('/equipement-assignment', [EquipementAssignmentController::class, 'index'])->name('equipement.assignment.index');
     Route::post('/equipement-assignment/assign', [EquipementAssignmentController::class, 'assign'])->name('equipement.assignment.assign');
-
+Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('notifications.index');
 require __DIR__ . '/auth.php';

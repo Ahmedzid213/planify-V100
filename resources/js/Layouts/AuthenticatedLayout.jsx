@@ -70,6 +70,12 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   Equipement Assignment
                 </NavLink>
               </div>
+              <NavLink
+                href={route("notifications.index")}
+                active={route().current("notifications.index")}
+              >
+                Notifications
+              </NavLink>
             </div>
 
             <div className="hidden sm:flex sm:items-center sm:ms-6">

@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Models\Notification;
 
 class TaskController extends Controller
 {
@@ -64,18 +65,28 @@ class TaskController extends Controller
     public function store(StoreTaskRequest $request)
     {
         $data = $request->validated();
-        /** @var $image \Illuminate\Http\UploadedFile */
         $image = $data['image'] ?? null;
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
         if ($image) {
             $data['image_path'] = $image->store('task/' . Str::random(), 'public');
         }
-        Task::create($data);
+        $task = Task::create($data);
+
+        // Create a notification
+        Notification::create([
+            'user_id' => Auth::id(),
+            'type' => 'new_task',
+            'data' => [
+                'task_id' => $task->id,
+                'task_name' => $task->name,
+            ]
+        ]);
 
         return to_route('task.index')
             ->with('success', 'Task was created');
     }
+
 
     /**
      * Display the specified resource.

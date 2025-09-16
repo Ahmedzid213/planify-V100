@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Models\User;
+use App\Models\Notification;
 
 class ProjectController extends Controller
 {
@@ -70,9 +71,7 @@ class ProjectController extends Controller
     public function store(StoreProjectRequest $request)
     {
         $data = $request->validated();
-        /** @var $image \Illuminate\Http\UploadedFile */
         $image = $data['image'] ?? null;
-
         $data['created_by'] = Auth::id();
         $data['updated_by'] = Auth::id();
 
@@ -80,7 +79,17 @@ class ProjectController extends Controller
             $data['image_path'] = $image->store('project/' . Str::random(), 'public');
         }
 
-        Project::create($data);
+        $project = Project::create($data);
+
+        // Create a notification
+        Notification::create([
+            'user_id' => Auth::id(),
+            'type' => 'new_project',
+            'data' => [
+                'project_id' => $project->id,
+                'project_name' => $project->name,
+            ]
+        ]);
 
         return to_route('project.index')
             ->with('success', 'Project was created');
