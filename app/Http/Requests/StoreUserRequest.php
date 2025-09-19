@@ -30,6 +30,7 @@ class StoreUserRequest extends FormRequest
                 'confirmed',
                 Password::min(8)->letters()->symbols(),
             ],
+            "role" => ["required", "string", "in:admin,project manager,technical manager,technicien"],
         ];
     }
 }

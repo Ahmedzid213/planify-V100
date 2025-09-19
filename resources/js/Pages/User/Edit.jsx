@@ -11,7 +11,7 @@ export default function Edit({ auth, user }) {
     email: user.email || "",
     password: "",
     password_confirmation: "",
-    role: user.role || "user",   // ✅ Ajout du champ role
+    role: user.role || "user", // ✅ Ajout du champ role
     _method: "PUT",
   });
 
@@ -115,11 +115,10 @@ export default function Edit({ auth, user }) {
                   onChange={(e) => setData("role", e.target.value)}
                   className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                 >
-                  <option value="technicien">technicien</option>
-                  <option value="technicial manager">technical manager</option>
-                  <option value="project manager">User</option>
+                  <option value="technicien">Technicien</option>
+                  <option value="technical manager">Technical Manager</option>
+                  <option value="project manager">Project Manager</option>
                   <option value="admin">Admin</option>
-                 
                 </select>
                 <InputError message={errors.role} className="mt-2" />
               </div>

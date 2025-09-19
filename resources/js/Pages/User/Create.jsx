@@ -105,21 +105,26 @@ export default function Create({ auth }) {
                   className="mt-2"
                 />
               </div>
-<div>
-  <label htmlFor="role" className="block text-sm font-medium text-gray-700">Role</label>
-  <select
-    id="role"
-    name="role"
-    value={data.role}
-    onChange={e => setData('role', e.target.value)}
-    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-  >
-    <option value="technicien">technicien</option>
-    <option value="technicial manager">technical manager</option>
-    <option value="project manager">project manager</option>
-    <option value="admin">Admin</option>
-  </select>
-</div>
+              <div>
+                <label
+                  htmlFor="role"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Role
+                </label>
+                <select
+                  id="role"
+                  name="role"
+                  value={data.role}
+                  onChange={(e) => setData("role", e.target.value)}
+                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                >
+                  <option value="technicien">Technicien</option>
+                  <option value="technical manager">Technical Manager</option>
+                  <option value="project manager">Project Manager</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
 
               <div className="mt-4 text-right">
                 <Link

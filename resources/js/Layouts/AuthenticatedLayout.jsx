@@ -33,42 +33,73 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 >
                   Dashboard
                 </NavLink>
-                <NavLink
-                  href={route("project.index")}
-                  active={route().current("project.index")}
-                >
-                  Projects
-                </NavLink>
-                <NavLink
-                  href={route("task.index")}
-                  active={route().current("task.index")}
-                >
-                  All Tasks
-                </NavLink>
-                <NavLink
-                  href={route("user.index")}
-                  active={route().current("user.index")}
-                >
-                  Users
-                </NavLink>
-                <NavLink
-                  href={route("task.myTasks")}
-                  active={route().current("task.myTasks")}
-                >
-                  My Tasks
-                </NavLink>
-                <NavLink
-                  href={route("equipement.index")}
-                  active={route().current("equipement.index")}
-                >
-                  Equipements
-                </NavLink>
-                <NavLink
-                  href={route("equipement.assignment.index")}
-                  active={route().current("equipement.assignment.index")}
-                >
-                  Equipement Assignment
-                </NavLink>
+
+                {user.role === "admin" && (
+                  <>
+                    <NavLink
+                      href={route("user.index")}
+                      active={route().current("user.index")}
+                    >
+                      Users
+                    </NavLink>
+                    <NavLink
+                      href={route("equipement.index")}
+                      active={route().current("equipement.index")}
+                    >
+                      Equipements
+                    </NavLink>
+                  </>
+                )}
+
+                {user.role === "technicien" && (
+                  <NavLink
+                    href={route("task.myTasks")}
+                    active={route().current("task.myTasks")}
+                  >
+                    My Tasks
+                  </NavLink>
+                )}
+
+                {user.role === "technical manager" && (
+                  <>
+                    <NavLink
+                      href={route("project.index")}
+                      active={route().current("project.index")}
+                    >
+                      Projects
+                    </NavLink>
+                    <NavLink
+                      href={route("task.index")}
+                      active={route().current("task.index")}
+                    >
+                      All Tasks
+                    </NavLink>
+                    <NavLink
+                      href={route("equipement.assignment.index")}
+                      active={route().current("equipement.assignment.index")}
+                    >
+                      Equipement Assignment
+                    </NavLink>
+                  </>
+                )}
+
+                {user.role === "project manager" && (
+                  <>
+                    <NavLink
+                      href={route("project.index")}
+                      active={route().current("project.index")}
+                    >
+                      Projects
+                    </NavLink>
+                    <NavLink
+                      href={route("task.myTasks")}
+                      active={route().current("task.myTasks")}
+                    >
+                      My Tasks
+                    </NavLink>
+                  </>
+                )}
+
                 <NavLink
                   href={route("notifications.index")}
                   active={route().current("notifications.index")}

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserCrudResource;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserCrudResource;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -51,8 +52,9 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $data = $request->validated();
-        $data['email_verified_at'] = time();
-        $data['password'] = bcrypt($data['password']);
+        $data['password'] = Hash::make($data['password']);
+        
+        // This is the key change for creating users
         User::create($data);
 
         return to_route('user.index')
@@ -64,7 +66,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return inertia('User/Show', [
+            'user' => new UserCrudResource($user),
+        ]);
     }
 
     /**
@@ -73,7 +77,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return inertia('User/Edit', [
-            'user' => new UserCrudResource($user),
+            'user' => new UserCrudResource($user)
         ]);
     }
 
@@ -85,10 +89,12 @@ class UserController extends Controller
         $data = $request->validated();
         $password = $data['password'] ?? null;
         if ($password) {
-            $data['password'] = bcrypt($password);
+            $data['password'] = Hash::make($password);
         } else {
             unset($data['password']);
         }
+        
+        // This is the key change for updating users
         $user->update($data);
 
         return to_route('user.index')

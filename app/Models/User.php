@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -21,8 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'email_verified_at',
-        'role',
+        'role', // 'email_verified_at' is removed
     ];
 
     /**
@@ -47,11 +45,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
     public function managedProjects()
-{
-return $this->hasMany(Project::class, 'project_manager_id');
-}
-public function notifications()
+    {
+        return $this->hasMany(Project::class, 'project_manager_id');
+    }
+
+    public function notifications()
     {
         return $this->hasMany(Notification::class);
     }

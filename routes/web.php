@@ -9,6 +9,10 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EquipementController;
 use App\Http\Controllers\EquipementAssignmentController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\TechnicienMiddleware;
+use App\Http\Middleware\TechnicalManagerMiddleware;
+use App\Http\Middleware\ProjectManagerMiddleware;
 use Inertia\Inertia;
 
 Route::redirect('/', '/dashboard');
@@ -26,7 +30,34 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('task', TaskController::class);
     Route::resource('user', UserController::class);
 });
+// Admin Routes
+    Route::middleware([AdminMiddleware::class])->group(function () {
+        Route::resource('user', UserController::class);
+        Route::resource('equipement', EquipementController::class);
+    });
 
+    // Technicien Routes
+    Route::middleware([TechnicienMiddleware::class])->group(function () {
+        Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
+    });
+
+    // Technical Manager Routes
+    Route::middleware([TechnicalManagerMiddleware::class])->group(function () {
+        Route::resource('project', ProjectController::class)->only(['index', 'show']);
+        Route::resource('task', TaskController::class)->except(['create', 'store', 'destroy']);
+        Route::get('/equipement-assignment', [EquipementAssignmentController::class, 'index'])->name('equipement.assignment.index');
+        Route::post('/equipement-assignment/assign', [EquipementAssignmentController::class, 'assign'])->name('equipement.assignment.assign');
+    });
+
+    // Project Manager Routes
+    Route::middleware([ProjectManagerMiddleware::class])->group(function () {
+        Route::get('/projects/{project}/tasks', [ProjectController::class, 'tasks'])->name('project.tasks');
+        Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
+    });
+
+
+    Route::resource('project', ProjectController::class);
+    Route::resource('task', TaskController::class);
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
