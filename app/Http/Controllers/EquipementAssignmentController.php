@@ -39,4 +39,12 @@ public function index()
 
         return back()->with('success', 'Equipement assigned successfully.');
     }
+    public function unassign(Equipement $equipement)
+    {
+        $equipement->user_id = null;
+        $equipement->status = 'available';
+        $equipement->save();
+
+        return back()->with('success', 'Equipement unassigned successfully.');
+    }
 }

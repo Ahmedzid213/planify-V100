@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('task', TaskController::class)->except(['create', 'store', 'destroy']);
         Route::get('/equipement-assignment', [EquipementAssignmentController::class, 'index'])->name('equipement.assignment.index');
         Route::post('/equipement-assignment/assign', [EquipementAssignmentController::class, 'assign'])->name('equipement.assignment.assign');
+        Route::post('/equipement-assignment/unassign/{equipement}', [EquipementAssignmentController::class, 'unassign']) ->name('equipement.assignment.unassign');
     });
 
     // Project Manager Routes
@@ -62,6 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/notifications', [App\Http\Controllers\NotificationController::class, 'index'])
         ->name('notifications.index');
+      
 });
 
 require __DIR__ . '/auth.php';

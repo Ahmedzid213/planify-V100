@@ -13,9 +13,19 @@ export default function Index({
     user_id: "",
   });
 
+  const { post: unassignPost } = useForm();
+
   const onSubmit = (e) => {
     e.preventDefault();
     post(route("equipement.assignment.assign"));
+  };
+
+  const unassignEquipement = (equipementId) => {
+    if (confirm("Are you sure you want to unassign this equipment?")) {
+      unassignPost(route("equipement.assignment.unassign", equipementId), {
+        preserveScroll: true,
+      });
+    }
   };
 
   return (
@@ -93,6 +103,7 @@ export default function Index({
                   <tr>
                     <th className="px-3 py-3">Equipement</th>
                     <th className="px-3 py-3">Assigned To</th>
+                    <th className="px-3 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -104,6 +115,14 @@ export default function Index({
                           users.find((user) => user.id === equipement.user_id)
                             ?.name
                         }
+                      </td>
+                      <td className="px-3 py-2 text-right">
+                        <button
+                          onClick={() => unassignEquipement(equipement.id)}
+                          className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                        >
+                          Unassign
+                        </button>
                       </td>
                     </tr>
                   ))}
