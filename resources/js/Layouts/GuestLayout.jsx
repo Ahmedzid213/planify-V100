@@ -4,10 +4,17 @@ import { Link } from "@inertiajs/react";
 export default function Guest({ children }) {
   return (
     <div className="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-      <div>
+      <div className="text-center">
         <Link href={route("dashboard")}>
-          <img src="/images/logo.jpg" alt="App Logo" className="h-20 w-auto" />
+          <img
+            src="/images/logo.jpg"
+            alt="App Logo"
+            className="h-20 w-auto inline-block"
+          />
         </Link>
+        <p className="mt-2 text-lg text-gray-600 dark:text-gray-300 font-semibold">
+          Vision. Managed.
+        </p>
       </div>
 
       <div className="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
