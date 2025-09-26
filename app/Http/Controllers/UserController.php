@@ -7,6 +7,9 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCrudResource;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Equipement; 
+use App\Models\Project;    
+use App\Models\Task;      
 
 class UserController extends Controller
 {
@@ -104,11 +107,26 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+     public function destroy(User $user)
     {
         $name = $user->name;
+
+        // 1. Un-assign the user from projects
+        Project::where('project_manager_id', $user->id)->update(['project_manager_id' => null]);
+        Project::where('created_by', $user->id)->update(['created_by' => null]);
+        Project::where('updated_by', $user->id)->update(['updated_by' => null]);
+
+        // 2. Un-assign the user from tasks
+        Task::where('assigned_user_id', $user->id)->update(['assigned_user_id' => null]);
+        Task::where('created_by', $user->id)->update(['created_by' => null]);
+        Task::where('updated_by', $user->id)->update(['updated_by' => null]);
+
+        // 3. Delete related equipment assignments
+        Equipement::where('user_id', $user->id)->delete();
+
+        // 4. Now, it's safe to delete the user
         $user->delete();
-        return to_route('user.index')
-            ->with('success', "User \"$name\" was deleted");
+
+        return to_route('user.index')->with('success', "User \"$name\" was successfully deleted");
     }
 }
