@@ -133,7 +133,7 @@ export default function Create({ auth }) {
                   <option value="technical manager">
                     Responsable Technique
                   </option>
-                  <option value="project manager">Responsable de Projet</option>
+                  
                   <option value="admin">Admin</option>
                 </select>
               </div>

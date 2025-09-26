@@ -128,7 +128,7 @@ export default function Edit({ auth, user }) {
                   <option value="technical manager">
                     Responsable Technique
                   </option>
-                  <option value="project manager">Chef de Projet</option>
+
                   <option value="admin">Admin</option>
                 </select>
                 <InputError message={errors.role} className="mt-2" />
