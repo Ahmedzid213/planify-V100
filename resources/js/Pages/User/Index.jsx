@@ -49,13 +49,13 @@ export default function Index({ auth, users, queryParams = null, success }) {
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Users
+            Utilisateurs
           </h2>
           <Link
             href={route("user.create")}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Add new
+            Ajouter un nouvel utilisateur
           </Link>
         </div>
       }
@@ -89,7 +89,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Name
+                        Nom
                       </TableHeading>
 
                       <TableHeading
@@ -107,7 +107,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Create Date
+                        Date de création
                       </TableHeading>
 
                       <th className="px-3 py-3 text-right">Actions</th>
@@ -161,13 +161,13 @@ export default function Index({ auth, users, queryParams = null, success }) {
                             href={route("user.edit", user.id)}
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                           >
-                            Edit
+                            Éditer
                           </Link>
                           <button
                             onClick={(e) => deleteUser(user)}
                             className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                           >
-                            Delete
+                            Supprimer
                           </button>
                         </td>
                       </tr>

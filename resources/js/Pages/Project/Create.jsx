@@ -6,14 +6,15 @@ import TextInput from "@/Components/TextInput";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create({ auth, managers }) {   // ✅ on reçoit managers du contrôleur
+export default function Create({ auth, managers }) {
+  // ✅ on reçoit managers du contrôleur
   const { data, setData, post, errors } = useForm({
     image: "",
     name: "",
     status: "",
     description: "",
     due_date: "",
-    project_manager_id: "",  // ✅ nouveau champ
+    project_manager_id: "", // ✅ nouveau champ
   });
 
   const onSubmit = (e) => {
@@ -27,7 +28,7 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Create new Project
+            Créer un nouveau projet
           </h2>
         </div>
       }
@@ -43,7 +44,10 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
             >
               {/* Image */}
               <div>
-                <InputLabel htmlFor="project_image_path" value="Project Image" />
+                <InputLabel
+                  htmlFor="project_image_path"
+                  value="image du projet"
+                />
                 <TextInput
                   id="project_image_path"
                   type="file"
@@ -56,7 +60,7 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
 
               {/* Nom */}
               <div className="mt-4">
-                <InputLabel htmlFor="project_name" value="Project Name" />
+                <InputLabel htmlFor="project_name" value="Nom du projet" />
                 <TextInput
                   id="project_name"
                   type="text"
@@ -71,7 +75,10 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
 
               {/* Description */}
               <div className="mt-4">
-                <InputLabel htmlFor="project_description" value="Project Description" />
+                <InputLabel
+                  htmlFor="project_description"
+                  value="Description du projet"
+                />
                 <TextAreaInput
                   id="project_description"
                   name="description"
@@ -84,7 +91,10 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
 
               {/* Deadline */}
               <div className="mt-4">
-                <InputLabel htmlFor="project_due_date" value="Project Deadline" />
+                <InputLabel
+                  htmlFor="project_due_date"
+                  value="Date d'échéance du projet"
+                />
                 <TextInput
                   id="project_due_date"
                   type="date"
@@ -98,29 +108,34 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
 
               {/* Status */}
               <div className="mt-4">
-                <InputLabel htmlFor="project_status" value="Project Status" />
+                <InputLabel htmlFor="project_status" value="Statut du projet" />
                 <SelectInput
                   name="status"
                   id="project_status"
                   className="mt-1 block w-full"
                   onChange={(e) => setData("status", e.target.value)}
                 >
-                  <option value="">Select Status</option>
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="completed">Completed</option>
+                  <option value="">Sélectionner Statut</option>
+                  <option value="pending">En attente</option>
+                  <option value="in_progress">En cours</option>
+                  <option value="completed">Terminé</option>
                 </SelectInput>
                 <InputError message={errors.status} className="mt-2" />
               </div>
 
               {/* ✅ Assigned User */}
               <div className="mt-4">
-                <InputLabel htmlFor="project_manager_id" value="Assigned User (Project Manager)" />
+                <InputLabel
+                  htmlFor="project_manager_id"
+                  value="Utilisateur assigné (Chef de projet)"
+                />
                 <select
                   id="project_manager_id"
                   name="project_manager_id"
                   value={data.project_manager_id}
-                  onChange={(e) => setData("project_manager_id", e.target.value)}
+                  onChange={(e) =>
+                    setData("project_manager_id", e.target.value)
+                  }
                   className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                 >
                   <option value="">— None —</option>
@@ -130,7 +145,10 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
                     </option>
                   ))}
                 </select>
-                <InputError message={errors.project_manager_id} className="mt-2" />
+                <InputError
+                  message={errors.project_manager_id}
+                  className="mt-2"
+                />
               </div>
 
               {/* Boutons */}
@@ -139,10 +157,10 @@ export default function Create({ auth, managers }) {   // ✅ on reçoit manager
                   href={route("project.index")}
                   className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-200 mr-2"
                 >
-                  Cancel
+                  Annuler
                 </Link>
                 <button className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
-                  Submit
+                  Soumettre
                 </button>
               </div>
             </form>

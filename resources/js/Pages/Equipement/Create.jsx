@@ -26,7 +26,7 @@ export default function Create({ auth }) {
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Create new Equipement
+            créer un nouvel équipement
           </h2>
         </div>
       }
@@ -41,7 +41,10 @@ export default function Create({ auth }) {
               className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg"
             >
               <div className="mt-4">
-                <InputLabel htmlFor="equipement_name" value="Equipement Name" />
+                <InputLabel
+                  htmlFor="Nom de l'équipement"
+                  value="Nom de l'équipement"
+                />
                 <TextInput
                   id="equipement_name"
                   type="text"
@@ -55,8 +58,8 @@ export default function Create({ auth }) {
               </div>
               <div className="mt-4">
                 <InputLabel
-                  htmlFor="equipement_brand"
-                  value="Equipement Brand"
+                  htmlFor="marque de l'équipement"
+                  value="Marque de l'équipement"
                 />
                 <TextInput
                   id="equipement_brand"
@@ -70,8 +73,8 @@ export default function Create({ auth }) {
               </div>
               <div className="mt-4">
                 <InputLabel
-                  htmlFor="equipement_reference"
-                  value="Equipement Reference"
+                  htmlFor="Référence de l'équipement"
+                  value="Référence de l'équipement"
                 />
                 <TextInput
                   id="equipement_reference"
@@ -85,8 +88,8 @@ export default function Create({ auth }) {
               </div>
               <div className="mt-4">
                 <InputLabel
-                  htmlFor="equipement_serial_number"
-                  value="Equipement Serial Number"
+                  htmlFor="Numéro de Série de l'Équipement"
+                  value="Numéro de Série de l'Équipement"
                 />
                 <TextInput
                   id="equipement_serial_number"
@@ -99,7 +102,10 @@ export default function Create({ auth }) {
                 <InputError message={errors.serial_number} className="mt-2" />
               </div>
               <div className="mt-4">
-                <InputLabel htmlFor="equipement_note" value="Equipement Note" />
+                <InputLabel
+                  htmlFor="remarque sur l'Équipement"
+                  value="remarque sur l'Équipement"
+                />
                 <TextAreaInput
                   id="equipement_note"
                   name="note"

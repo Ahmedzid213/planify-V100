@@ -33,11 +33,11 @@ export default function Index({
       user={auth.user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Equipement Assignment
+          Assignement d'équipement
         </h2>
       }
     >
-      <Head title="Equipement Assignment" />
+      <Head title="Assignement d'équipement" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -47,7 +47,7 @@ export default function Index({
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                      Free Equipement
+                      Équipement Libre
                     </h3>
                     <select
                       name="equipement_id"
@@ -55,7 +55,7 @@ export default function Index({
                       className="mt-1 block w-full dark:bg-gray-900 dark:text-gray-300"
                       onChange={(e) => setData("equipement_id", e.target.value)}
                     >
-                      <option value="">Select Equipement</option>
+                      <option value="">Sélectionner Équipement</option>
                       {Object.values(freeEquipements).map((equipement) => (
                         <option key={equipement.id} value={equipement.id}>
                           {equipement.name}
@@ -65,7 +65,7 @@ export default function Index({
                   </div>
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                      Users
+                      Utilisateurs
                     </h3>
                     <select
                       name="user_id"
@@ -73,7 +73,7 @@ export default function Index({
                       className="mt-1 block w-full dark:bg-gray-900 dark:text-gray-300"
                       onChange={(e) => setData("user_id", e.target.value)}
                     >
-                      <option value="">Select User</option>
+                      <option value="">Sélectionner Utilisateur</option>
                       {users.map((user) => (
                         <option key={user.id} value={user.id}>
                           {user.name}
@@ -87,7 +87,7 @@ export default function Index({
                     type="submit"
                     className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
                   >
-                    Assign Equipement
+                    Assigner Équipement
                   </button>
                 </div>
               </form>
@@ -96,13 +96,13 @@ export default function Index({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mt-4">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                In Use Equipement
+                Équipement en Utilisation
               </h3>
               <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-4">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                   <tr>
-                    <th className="px-3 py-3">Equipement</th>
-                    <th className="px-3 py-3">Assigned To</th>
+                    <th className="px-3 py-3">Équipement</th>
+                    <th className="px-3 py-3">Assigné à</th>
                     <th className="px-3 py-3 text-right">Actions</th>
                   </tr>
                 </thead>
@@ -121,7 +121,7 @@ export default function Index({
                           onClick={() => unassignEquipement(equipement.id)}
                           className="font-medium text-red-600 dark:text-red-500 hover:underline"
                         >
-                          Unassign
+                          Désassigner
                         </button>
                       </td>
                     </tr>

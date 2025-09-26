@@ -27,7 +27,7 @@ export default function Edit({ auth, equipement }) {
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Edit equipement "{equipement.data.name}"
+            Modifier l'équipement "{equipement.data.name}"
           </h2>
         </div>
       }

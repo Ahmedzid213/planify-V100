@@ -28,7 +28,7 @@ export default function Dashboard({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-amber-500 text-2xl font-semibold">
-                Pending Tasks
+                taches en attente
               </h3>
               <p className="text-xl mt-4">
                 <span className="mr-2">{myPendingTasks}</span>/
@@ -39,7 +39,7 @@ export default function Dashboard({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-blue-500 text-2xl font-semibold">
-                In Progress Tasks
+                Tâches en cours
               </h3>
               <p className="text-xl mt-4">
                 <span className="mr-2">{myProgressTasks}</span>/
@@ -50,7 +50,7 @@ export default function Dashboard({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-green-500 text-2xl font-semibold">
-                Completed Tasks
+                Tâches terminées
               </h3>
               <p className="text-xl mt-4">
                 <span className="mr-2">{myCompletedTasks}</span>/
@@ -63,7 +63,7 @@ export default function Dashboard({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-gray-200 text-xl font-semibold">
-                My Active Tasks
+                Mes Tâches Actives
               </h3>
 
               <table className="mt-3 w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

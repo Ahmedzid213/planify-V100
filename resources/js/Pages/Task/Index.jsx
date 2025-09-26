@@ -11,18 +11,18 @@ export default function Index({ auth, success, tasks, queryParams = null }) {
       header={
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Tasks
+            Tâches
           </h2>
           <Link
             href={route("task.create")}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Add new
+            Ajouter une nouvelle
           </Link>
         </div>
       }
     >
-      <Head title="Tasks" />
+      <Head title="Tâches" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

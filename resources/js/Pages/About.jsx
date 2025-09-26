@@ -11,22 +11,24 @@ export default function About({ auth }) {
       user={auth.user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          About Us
+          A propos de nous
         </h2>
       }
     >
-      <Head title="About Us" />
+      <Head title="A propos de nous" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 md:p-12 text-gray-900 dark:text-gray-100">
               <h1 className="text-3xl font-bold mb-4 text-center">
-                Meet the Team
+                Meet the Team !
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-10 text-center">
-                We are a passionate team dedicated to creating the best project
-                management tools.
+                nous sommes une équipe de développeurs passionnés dédiée à la
+                création de solutions logicielles innovantes. Notre objectif est
+                de transformer des idées en produits numériques qui font une
+                différence.
               </p>
 
               {/* Team Member Cards */}
@@ -53,18 +55,19 @@ export default function About({ auth }) {
               {/* Our Mission Section */}
               <div className="mt-16">
                 <h2 className="text-2xl font-bold mb-4 text-center">
-                  Our Mission
+                  Notre Mission
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-center">
-                  Our mission is to empower teams to achieve their goals by
-                  providing intuitive, flexible, and powerful project management
-                  software. We believe that with the right tools, any team can
-                  accomplish amazing things.
+                  Notre mission est de permettre aux équipes d'atteindre leurs
+                  objectifs en fournissant des logiciels de gestion de projet
+                  intuitifs, flexibles et puissants. Nous croyons qu'avec les
+                  bons outils, toute équipe peut accomplir des choses
+                  incroyables.
                 </p>
                 {/* Follow Us Section */}
                 <div className="mt-16">
                   <h2 className="text-2xl font-bold mb-4 text-center">
-                    OUR GITHUB REPOSITORIES
+                    NOS REPOSITOIRES GITHUB
                   </h2>
                   <div className="flex justify-center">
                     <a

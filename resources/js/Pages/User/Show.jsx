@@ -27,16 +27,20 @@ export default function Show({ auth, user, tasks, queryParams }) {
               <div className="grid gap-1 grid-cols-2 mt-2">
                 <div>
                   <div>
-                    <label className="font-bold text-lg">User ID</label>
+                    <label className="font-bold text-lg">ID utilisateur</label>
                     <p className="mt-1">{user.id}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">User Name</label>
+                    <label className="font-bold text-lg">
+                      Nom d'utilisateur
+                    </label>
                     <p className="mt-1">{user.name}</p>
                   </div>
 
                   <div className="mt-4">
-                    <label className="font-bold text-lg">User Status</label>
+                    <label className="font-bold text-lg">
+                      Statut de l'utilisateur
+                    </label>
                     <p className="mt-1">
                       <span
                         className={
@@ -49,28 +53,32 @@ export default function Show({ auth, user, tasks, queryParams }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Created By</label>
+                    <label className="font-bold text-lg">Créé par</label>
                     <p className="mt-1">{user.createdBy.name}</p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Due Date</label>
+                    <label className="font-bold text-lg">Date d'échéance</label>
                     <p className="mt-1">{user.due_date}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Create Date</label>
+                    <label className="font-bold text-lg">
+                      Date de création
+                    </label>
                     <p className="mt-1">{user.created_at}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Updated By</label>
+                    <label className="font-bold text-lg">Mis à jour par</label>
                     <p className="mt-1">{user.updatedBy.name}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-4">
-                <label className="font-bold text-lg">User Description</label>
+                <label className="font-bold text-lg">
+                  Description de l'utilisateur
+                </label>
                 <p className="mt-1">{user.description}</p>
               </div>
             </div>

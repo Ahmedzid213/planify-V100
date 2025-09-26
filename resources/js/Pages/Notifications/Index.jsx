@@ -25,13 +25,13 @@ export default function Index({ auth, notifications }) {
                   >
                     {notification.type === "new_project" && (
                       <p>
-                        New project created:{" "}
+                        Nouveau projet créé:{" "}
                         <strong>{notification.data.project_name}</strong>
                       </p>
                     )}
                     {notification.type === "new_task" && (
                       <p>
-                        New task created:{" "}
+                        Nouvelle tâche créée:{" "}
                         <strong>{notification.data.task_name}</strong>
                       </p>
                     )}

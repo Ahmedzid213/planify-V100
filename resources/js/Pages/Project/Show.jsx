@@ -18,7 +18,7 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
             href={route("project.edit", project.id)}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Edit
+            Modifier
           </Link>
         </div>
       }
@@ -38,16 +38,18 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
               <div className="grid gap-1 grid-cols-2 mt-2">
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Project ID</label>
+                    <label className="font-bold text-lg">ID Projet</label>
                     <p className="mt-1">{project.id}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Project Name</label>
+                    <label className="font-bold text-lg">Nom du Projet</label>
                     <p className="mt-1">{project.name}</p>
                   </div>
 
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Project Status</label>
+                    <label className="font-bold text-lg">
+                      Statut du Projet
+                    </label>
                     <p className="mt-1">
                       <span
                         className={
@@ -60,28 +62,32 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Created By</label>
+                    <label className="font-bold text-lg">Créé par</label>
                     <p className="mt-1">{project.createdBy.name}</p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Due Date</label>
+                    <label className="font-bold text-lg">Date d'échéance</label>
                     <p className="mt-1">{project.due_date}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Create Date</label>
+                    <label className="font-bold text-lg">
+                      Date de création
+                    </label>
                     <p className="mt-1">{project.created_at}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Updated By</label>
+                    <label className="font-bold text-lg">Modifié par</label>
                     <p className="mt-1">{project.updatedBy.name}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-4">
-                <label className="font-bold text-lg">Project Description</label>
+                <label className="font-bold text-lg">
+                  Description du Projet
+                </label>
                 <p className="mt-1">{project.description}</p>
               </div>
             </div>

@@ -19,7 +19,7 @@ export default function Show({ auth, task }) {
             href={route("task.edit", task.id)}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Edit
+            Editer
           </Link>
         </div>
       }
@@ -39,16 +39,18 @@ export default function Show({ auth, task }) {
               <div className="grid gap-1 grid-cols-2 mt-2">
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Task ID</label>
+                    <label className="font-bold text-lg">ID de la tâche</label>
                     <p className="mt-1">{task.id}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Task Name</label>
+                    <label className="font-bold text-lg">Nom de la tâche</label>
                     <p className="mt-1">{task.name}</p>
                   </div>
 
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Task Status</label>
+                    <label className="font-bold text-lg">
+                      Statut de la tâche
+                    </label>
                     <p className="mt-1">
                       <span
                         className={
@@ -62,7 +64,9 @@ export default function Show({ auth, task }) {
                   </div>
 
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Task Priority</label>
+                    <label className="font-bold text-lg">
+                      Priorité de la tâche
+                    </label>
                     <p className="mt-1">
                       <span
                         className={
@@ -75,25 +79,27 @@ export default function Show({ auth, task }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Created By</label>
+                    <label className="font-bold text-lg">Créé par</label>
                     <p className="mt-1">{task.createdBy.name}</p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Due Date</label>
+                    <label className="font-bold text-lg">Date d'échéance</label>
                     <p className="mt-1">{task.due_date}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Create Date</label>
+                    <label className="font-bold text-lg">
+                      Date de création
+                    </label>
                     <p className="mt-1">{task.created_at}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Updated By</label>
+                    <label className="font-bold text-lg">Modifié par</label>
                     <p className="mt-1">{task.updatedBy.name}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Project</label>
+                    <label className="font-bold text-lg">Projet</label>
                     <p className="mt-1">
                       <Link
                         href={route("project.show", task.project.id)}
@@ -104,14 +110,18 @@ export default function Show({ auth, task }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Assigned User</label>
+                    <label className="font-bold text-lg">
+                      Utilisateur assigné
+                    </label>
                     <p className="mt-1">{task.assignedUser.name}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-4">
-                <label className="font-bold text-lg">Task Description</label>
+                <label className="font-bold text-lg">
+                  Description de la tâche
+                </label>
                 <p className="mt-1">{task.description}</p>
               </div>
             </div>

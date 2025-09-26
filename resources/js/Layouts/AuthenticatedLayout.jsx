@@ -40,13 +40,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       href={route("user.index")}
                       active={route().current("user.index")}
                     >
-                      Users
+                      Utilisateurs
                     </NavLink>
                     <NavLink
                       href={route("equipement.index")}
                       active={route().current("equipement.index")}
                     >
-                      Equipements
+                      Équipements
                     </NavLink>
                   </>
                 )}
@@ -56,7 +56,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                     href={route("task.myTasks")}
                     active={route().current("task.myTasks")}
                   >
-                    My Tasks
+                    Mes Tâches
                   </NavLink>
                 )}
 
@@ -66,19 +66,19 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       href={route("project.index")}
                       active={route().current("project.index")}
                     >
-                      Projects
+                      Projets
                     </NavLink>
                     <NavLink
                       href={route("task.index")}
                       active={route().current("task.index")}
                     >
-                      All Tasks
+                      Toutes les Tâches
                     </NavLink>
                     <NavLink
                       href={route("equipement.assignment.index")}
                       active={route().current("equipement.assignment.index")}
                     >
-                      Equipement Assignment
+                      assignations Équipements
                     </NavLink>
                   </>
                 )}
@@ -89,13 +89,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       href={route("project.index")}
                       active={route().current("project.index")}
                     >
-                      Projects
+                      Projets
                     </NavLink>
                     <NavLink
                       href={route("task.myTasks")}
                       active={route().current("task.myTasks")}
                     >
-                      My Tasks
+                      Mes Tâches
                     </NavLink>
                   </>
                 )}
@@ -110,7 +110,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   href={route("about")}
                   active={route().current("about")}
                 >
-                  About Us
+                  À Propos
                 </NavLink>
               </div>
             </div>
@@ -142,14 +142,14 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   </Dropdown.Trigger>
                   <Dropdown.Content>
                     <Dropdown.Link href={route("profile.edit")}>
-                      Profile
+                      Profil
                     </Dropdown.Link>
                     <Dropdown.Link
                       href={route("logout")}
                       method="post"
                       as="button"
                     >
-                      Log Out
+                      Se Déconnecter
                     </Dropdown.Link>
                   </Dropdown.Content>
                 </Dropdown>
@@ -219,14 +219,14 @@ export default function AuthenticatedLayout({ user, header, children }) {
             </div>
             <div className="mt-3 space-y-1">
               <ResponsiveNavLink href={route("profile.edit")}>
-                Profile
+                Profil
               </ResponsiveNavLink>
               <ResponsiveNavLink
                 method="post"
                 href={route("logout")}
                 as="button"
               >
-                Log Out
+                Se Déconnecter
               </ResponsiveNavLink>
             </div>
           </div>

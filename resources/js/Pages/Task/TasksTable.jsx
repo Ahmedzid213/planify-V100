@@ -70,7 +70,7 @@ export default function TasksTable({
               </TableHeading>
               <th className="px-3 py-3">Image</th>
               {!hideProjectColumn && (
-                <th className="px-3 py-3">Project Name</th>
+                <th className="px-3 py-3">Nom du projet</th>
               )}
               <TableHeading
                 name="name"
@@ -78,7 +78,7 @@ export default function TasksTable({
                 sort_direction={queryParams.sort_direction}
                 sortChanged={sortChanged}
               >
-                Name
+                Nom
               </TableHeading>
 
               <TableHeading
@@ -87,7 +87,7 @@ export default function TasksTable({
                 sort_direction={queryParams.sort_direction}
                 sortChanged={sortChanged}
               >
-                Status
+                Statut
               </TableHeading>
 
               <TableHeading
@@ -96,7 +96,7 @@ export default function TasksTable({
                 sort_direction={queryParams.sort_direction}
                 sortChanged={sortChanged}
               >
-                Create Date
+                Date de création
               </TableHeading>
 
               <TableHeading
@@ -105,9 +105,9 @@ export default function TasksTable({
                 sort_direction={queryParams.sort_direction}
                 sortChanged={sortChanged}
               >
-                Due Date
+                Date d'échéance
               </TableHeading>
-              <th className="px-3 py-3">Created By</th>
+              <th className="px-3 py-3">Créé par</th>
               <th className="px-3 py-3 text-right">Actions</th>
             </tr>
           </thead>
@@ -120,7 +120,7 @@ export default function TasksTable({
                 <TextInput
                   className="w-full"
                   defaultValue={queryParams.name}
-                  placeholder="Task Name"
+                  placeholder="nom de la tâche"
                   onBlur={(e) => searchFieldChanged("name", e.target.value)}
                   onKeyPress={(e) => onKeyPress("name", e)}
                 />
@@ -131,10 +131,10 @@ export default function TasksTable({
                   defaultValue={queryParams.status}
                   onChange={(e) => searchFieldChanged("status", e.target.value)}
                 >
-                  <option value="">Select Status</option>
-                  <option value="pending">Pending</option>
-                  <option value="in_progress">In Progress</option>
-                  <option value="completed">Completed</option>
+                  <option value="">Sélectionner Statut</option>
+                  <option value="pending">En attente</option>
+                  <option value="in_progress">En cours</option>
+                  <option value="completed">Terminé</option>
                 </SelectInput>
               </th>
               <th className="px-3 py-3"></th>
@@ -177,13 +177,13 @@ export default function TasksTable({
                     href={route("task.edit", task.id)}
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                   >
-                    Edit
+                    Modifier
                   </Link>
                   <button
                     onClick={(e) => deleteTask(task)}
                     className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                   >
-                    Delete
+                    Supprimer
                   </button>
                 </td>
               </tr>

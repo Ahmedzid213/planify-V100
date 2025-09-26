@@ -26,12 +26,12 @@ export default function Edit({ auth, user }) {
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Edit user "{user.name}"
+            Modifier l'utilisateur "{user.name}"
           </h2>
         </div>
       }
     >
-      <Head title="Users" />
+      <Head title="Utilisateurs" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -42,7 +42,10 @@ export default function Edit({ auth, user }) {
             >
               {/* Name */}
               <div className="mt-4">
-                <InputLabel htmlFor="user_name" value="User Name" />
+                <InputLabel
+                  htmlFor="Nom d'utilisateur"
+                  value="Nom d'utilisateur"
+                />
                 <TextInput
                   id="user_name"
                   type="text"
@@ -57,7 +60,10 @@ export default function Edit({ auth, user }) {
 
               {/* Email */}
               <div className="mt-4">
-                <InputLabel htmlFor="user_email" value="User Email" />
+                <InputLabel
+                  htmlFor="email d'utilisateur"
+                  value="email d'utilisateur"
+                />
                 <TextInput
                   id="user_email"
                   type="text"
@@ -71,7 +77,10 @@ export default function Edit({ auth, user }) {
 
               {/* Password */}
               <div className="mt-4">
-                <InputLabel htmlFor="user_password" value="Password" />
+                <InputLabel
+                  htmlFor="Mot de passe utilisateur"
+                  value="Mot de passe utilisateur"
+                />
                 <TextInput
                   id="user_password"
                   type="password"
@@ -86,8 +95,8 @@ export default function Edit({ auth, user }) {
               {/* Confirm Password */}
               <div className="mt-4">
                 <InputLabel
-                  htmlFor="user_password_confirmation"
-                  value="Confirm Password"
+                  htmlFor="Confirmer le mot de passe utilisateur"
+                  value="Confirmer le mot de passe utilisateur"
                 />
                 <TextInput
                   id="user_password_confirmation"
@@ -116,8 +125,10 @@ export default function Edit({ auth, user }) {
                   className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                 >
                   <option value="technicien">Technicien</option>
-                  <option value="technical manager">Technical Manager</option>
-                  <option value="project manager">Project Manager</option>
+                  <option value="technical manager">
+                    Responsable Technique
+                  </option>
+                  <option value="project manager">Chef de Projet</option>
                   <option value="admin">Admin</option>
                 </select>
                 <InputError message={errors.role} className="mt-2" />
@@ -129,10 +140,10 @@ export default function Edit({ auth, user }) {
                   href={route("user.index")}
                   className="bg-gray-100 py-1 px-3 text-gray-800 rounded shadow transition-all hover:bg-gray-200 mr-2"
                 >
-                  Cancel
+                  Annuler
                 </Link>
                 <button className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600">
-                  Submit
+                  Soumettre
                 </button>
               </div>
             </form>

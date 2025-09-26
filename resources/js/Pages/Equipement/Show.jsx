@@ -24,24 +24,26 @@ export default function Show({ auth, equipement }) {
                     <p className="mt-1">{equipement.data.id}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Equipement Name</label>
+                    <label className="font-bold text-lg">
+                      Nom de l'Equipement
+                    </label>
                     <p className="mt-1">{equipement.data.name}</p>
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Equipement Brand
+                      Marque de l'Equipement
                     </label>
                     <p className="mt-1">{equipement.data.brand}</p>
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Equipement Reference
+                      Référence de l'Equipement
                     </label>
                     <p className="mt-1">{equipement.data.reference}</p>
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Equipement Serial Number
+                      Numéro de Série de l'Equipement
                     </label>
                     <p className="mt-1">{equipement.data.serial_number}</p>
                   </div>

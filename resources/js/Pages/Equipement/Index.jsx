@@ -59,7 +59,7 @@ export default function Index({
             href={route("equipement.create")}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Add new
+            Ajouter un Équipement
           </Link>
         </div>
       }
@@ -93,7 +93,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Name
+                        Nom
                       </TableHeading>
                       <TableHeading
                         name="brand"
@@ -101,7 +101,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Brand
+                        Marque
                       </TableHeading>
                       <TableHeading
                         name="reference"
@@ -109,7 +109,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Reference
+                        Référence
                       </TableHeading>
                       <TableHeading
                         name="serial_number"
@@ -117,7 +117,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Serial Number
+                        Numéro de Série
                       </TableHeading>
                       <TableHeading
                         name="created_at"
@@ -125,7 +125,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Create Date
+                        Date de Création
                       </TableHeading>
                       <th className="px-3 py-3 text-right">Actions</th>
                     </tr>
@@ -186,13 +186,13 @@ export default function Index({
                             href={route("equipement.edit", equipement.id)}
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                           >
-                            Edit
+                            Modifier
                           </Link>
                           <button
                             onClick={(e) => deleteEquipement(equipement)}
                             className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
                           >
-                            Delete
+                            Supprimer
                           </button>
                         </td>
                       </tr>
