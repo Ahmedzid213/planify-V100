@@ -83,21 +83,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   </>
                 )}
 
-                {user.role === "project manager" && (
-                  <>
-                    <NavLink
-                      href={route("project.index")}
-                      active={route().current("project.index")}
-                    >
-                      Projets
-                    </NavLink>
-                    <NavLink
-                      href={route("task.myTasks")}
-                      active={route().current("task.myTasks")}
-                    >
-                      Mes Tâches
-                    </NavLink>
-                  </>
+                {user.is_project_manager && (
+                  <NavLink
+                    href={route("project.myProjects")}
+                    active={route().current("project.myProjects")}
+                  >
+                    My Projects
+                  </NavLink>
                 )}
 
                 <NavLink

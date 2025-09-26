@@ -50,7 +50,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Project Manager Routes
     Route::middleware([ProjectManagerMiddleware::class])->group(function () {
-        Route::get('/projects/{project}/tasks', [ProjectController::class, 'tasks'])->name('project.tasks');
+        Route::get('/my-projects', [ProjectController::class, 'myProjects'])
+         ->name('project.myProjects')
+         ->middleware(ProjectManagerMiddleware::class);
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

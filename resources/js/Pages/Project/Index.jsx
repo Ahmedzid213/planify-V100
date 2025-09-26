@@ -15,6 +15,7 @@ export default function Index({
   managers,
   queryParams = null,
   success,
+  pageTitle = "Projets", // ✅ Default title is "Projets"
 }) {
   queryParams = queryParams || {};
 
@@ -24,7 +25,8 @@ export default function Index({
     } else {
       delete queryParams[name];
     }
-    router.get(route("project.index"), queryParams);
+    // ✅ Use the current page's URL for filtering
+    router.get(window.location.pathname, queryParams);
   };
 
   const onKeyPress = (name, e) => {
@@ -40,7 +42,8 @@ export default function Index({
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
     }
-    router.get(route("project.index"), queryParams);
+    // ✅ Use the current page's URL for sorting
+    router.get(window.location.pathname, queryParams);
   };
 
   const deleteProject = (project) => {
@@ -56,7 +59,7 @@ export default function Index({
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Projets
+            {pageTitle} {/* ✅ Use the dynamic pageTitle prop */}
           </h2>
           <Link
             href={route("project.create")}
@@ -67,8 +70,8 @@ export default function Index({
         </div>
       }
     >
-      <Head title="Projets" />
-
+      <Head title={pageTitle} />{" "}
+      {/* ✅ Use the dynamic pageTitle for the Head */}
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {success && (
@@ -80,6 +83,7 @@ export default function Index({
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <div className="overflow-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  {/* ... rest of your table code remains the same ... */}
                   {/* En-tête */}
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                     <tr className="text-nowrap">

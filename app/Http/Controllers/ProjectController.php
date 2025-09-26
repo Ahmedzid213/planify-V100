@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\TaskResource;
+use App\Http\Resources\UserResource; // Make sure UserResource is imported
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
@@ -25,7 +26,6 @@ class ProjectController extends Controller
         $sortField = request("sort_field", 'created_at');
         $sortDirection = request("sort_direction", "desc");
 
-        // ✅ Filtres
         if (request("name")) {
             $query->where("name", "like", "%" . request("name") . "%");
         }
@@ -40,7 +40,6 @@ class ProjectController extends Controller
             ->paginate(10)
             ->onEachSide(1);
 
-        // ✅ Envoyer aussi la liste des managers pour le filtre
         $managers = User::select('id', 'name')->orderBy('name')->get();
 
         return inertia("Project/Index", [
@@ -48,9 +47,12 @@ class ProjectController extends Controller
             'managers' => $managers,
             'queryParams' => request()->query() ?: null,
             'success' => session('success'),
+            // You can optionally add a pageTitle here for clarity
+            'pageTitle' => "All Projects"
         ]);
     }
 
+    // ... (create, store, show, edit, update, destroy methods remain the same)
     /**
      * Show the form for creating a new resource.
      */
@@ -100,7 +102,6 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        // ✅ Charger la relation manager
         $project->load(['manager', 'createdBy', 'updatedBy']);
 
         $query = $project->tasks();
@@ -135,8 +136,6 @@ class ProjectController extends Controller
         $managers = User::select('id', 'name', 'email', 'role')
             ->orderBy('name')
             ->get();
-
-        // ✅ Charger la relation manager pour édition
         $project->load(['manager']);
 
         return inertia('Project/Edit', [
@@ -152,7 +151,6 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
         $image = $data['image'] ?? null;
-
         $data['updated_by'] = Auth::id();
 
         if ($image) {
@@ -174,7 +172,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $name = $project->name;
-
         $project->delete();
 
         if ($project->image_path) {
@@ -183,5 +180,45 @@ class ProjectController extends Controller
 
         return to_route('project.index')
             ->with('success', "Project \"$name\" was deleted");
+    }
+
+
+    // 👇 **** THIS IS THE CORRECTED METHOD **** 👇
+    public function myProjects()
+    {
+        $user = Auth::user();
+
+        // ✅ 1. Eager-load the relationships just like in the index method
+        $query = Project::with(['manager', 'createdBy', 'updatedBy'])
+                        ->where('project_manager_id', $user->id);
+
+        $sortField = request("sort_field", 'created_at');
+        $sortDirection = request("sort_direction", "desc");
+
+        if (request("name")) {
+            $query->where("name", "like", "%" . request("name") . "%");
+        }
+        if (request("status")) {
+            $query->where("status", request("status"));
+        }
+        // This filter is not strictly necessary here, but it's good to keep for consistency
+        if (request("manager_id")) {
+            $query->where("project_manager_id", request("manager_id"));
+        }
+
+        $projects = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+
+        // ✅ 2. Get the list of managers for the filter dropdown
+        $managers = User::select('id', 'name')->orderBy('name')->get();
+
+        return inertia("Project/Index", [
+            "projects" => ProjectResource::collection($projects),
+            'managers' => $managers, // ✅ 3. Pass the managers to the view
+            'queryParams' => request()->query() ?: null,
+            'success' => session('success'),
+            'pageTitle' => "My Projects",
+        ]);
     }
 }
