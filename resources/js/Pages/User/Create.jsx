@@ -10,6 +10,7 @@ export default function Create({ auth }) {
     email: "",
     password: "",
     password_confirmation: "",
+    role: "technicien",
   });
 
   const onSubmit = (e) => {
