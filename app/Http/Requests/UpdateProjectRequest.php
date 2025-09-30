@@ -28,7 +28,7 @@ class UpdateProjectRequest extends FormRequest
             "description" => ['nullable', 'string'],
             'due_date' => ['nullable', 'date'],
             'status' => ['required', Rule::in(['pending', 'in_progress', 'completed'])],
-            'project_manager_id' => ['nullable', 'integer', Rule::exists('users', 'id')]
+            'project_manager_id' => ['nullable', 'integer', Rule::exists('users', 'id')->where('role', 'technicien')]
         ];
     }
 }

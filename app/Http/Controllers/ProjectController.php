@@ -52,13 +52,13 @@ class ProjectController extends Controller
         ]);
     }
 
-    // ... (create, store, show methods remain the same)
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
         $managers = User::select('id', 'name', 'email', 'role')
+            ->where('role', 'technicien') // <-- This line is added
             ->orderBy('name')
             ->get();
 
@@ -138,6 +138,7 @@ class ProjectController extends Controller
         }
 
         $managers = User::select('id', 'name', 'email', 'role')
+            ->where('role', 'technicien') // <-- This line is added
             ->orderBy('name')
             ->get();
         $project->load(['manager']);
