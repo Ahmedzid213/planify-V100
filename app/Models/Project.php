@@ -29,4 +29,8 @@ class Project extends Model
 {
 return $this->belongsTo(User::class, 'project_manager_id');
 }
+public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
 }

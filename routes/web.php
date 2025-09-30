@@ -26,7 +26,8 @@ Route::get('/about', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // Dashboard (accessible to all authenticated users)
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+Route::post('/files', [FileController::class, 'store'])->name('file.store');
+    Route::delete('/files/{file}', [FileController::class, 'destroy'])->name('file.destroy');
     // Profile (accessible to all authenticated users)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

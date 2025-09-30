@@ -93,6 +93,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $task->load('files');
         return inertia('Task/Show', [
             'task' => new TaskResource($task),
         ]);

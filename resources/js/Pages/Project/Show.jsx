@@ -1,11 +1,20 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import {
   PROJECT_STATUS_CLASS_MAP,
   PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
 import TasksTable from "../Task/TasksTable";
+import FileUpload from "@/Components/FileUpload";
+import FileCard from "@/Components/FileCard";
+
 export default function Show({ auth, success, project, tasks, queryParams }) {
+  const handleDelete = (file) => {
+    if (confirm("Are you sure you want to delete this file?")) {
+      router.delete(route("file.destroy", file.id));
+    }
+  };
+
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -105,6 +114,25 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                 queryParams={queryParams}
                 hideProjectColumn={true}
               />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pb-12">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+          <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+              Files
+            </h3>
+            <div className="mt-6 space-y-4">
+              {project.files &&
+                project.files.map((file) => (
+                  <FileCard key={file.id} file={file} onDelete={handleDelete} />
+                ))}
+            </div>
+            <div className="mt-6">
+              <FileUpload fileableId={project.id} fileableType="project" />
             </div>
           </div>
         </div>
