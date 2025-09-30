@@ -104,6 +104,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        $task->load('files'); // <--- THIS LINE WAS ADDED
+
         $projects = Project::query()->orderBy('name', 'asc')->get();
         $users = User::query()->where('role', 'technicien')->orderBy('name', 'asc')->get();
 
@@ -140,6 +142,14 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $name = $task->name;
+        
+        // Delete associated files from storage
+        foreach ($task->files as $file) {
+            Storage::delete($file->path);
+        }
+        // Delete file records from database
+        $task->files()->delete();
+
         $task->delete();
         if ($task->image_path) {
             Storage::disk('public')->deleteDirectory(dirname($task->image_path));

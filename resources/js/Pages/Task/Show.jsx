@@ -10,11 +10,13 @@ import FileUpload from "@/Components/FileUpload";
 import FileCard from "@/Components/FileCard";
 
 export default function Show({ auth, task }) {
-  const taskData = task.data; // Use task.data
+  const taskData = task.data;
 
   const handleDelete = (file) => {
     if (confirm("Are you sure you want to delete this file?")) {
-      router.delete(route("file.destroy", file.id));
+      router.delete(route("file.destroy", file.id), {
+        preserveScroll: true,
+      });
     }
   };
 
@@ -37,7 +39,7 @@ export default function Show({ auth, task }) {
     >
       <Head title={`Task "${taskData.name}"`} />
       <div className="py-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div>
               <img
@@ -137,12 +139,7 @@ export default function Show({ auth, task }) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* NEW FILE UPLOAD SECTION */}
-      <div className="pb-12">
-        <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
               Files
@@ -162,3 +159,4 @@ export default function Show({ auth, task }) {
     </AuthenticatedLayout>
   );
 }
+
