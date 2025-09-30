@@ -52,7 +52,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    // ... (create, store, show, edit, update, destroy methods remain the same)
+    // ... (create, store, show methods remain the same)
     /**
      * Show the form for creating a new resource.
      */
@@ -133,6 +133,10 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        if (Auth::user()->role === 'technicien') {
+            abort(403, 'ACTION NON AUTORISÉE.');
+        }
+
         $managers = User::select('id', 'name', 'email', 'role')
             ->orderBy('name')
             ->get();
@@ -149,6 +153,10 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        if (Auth::user()->role === 'technicien') {
+            abort(403, 'ACTION NON AUTORISÉE.');
+        }
+
         $data = $request->validated();
         $image = $data['image'] ?? null;
         $data['updated_by'] = Auth::id();

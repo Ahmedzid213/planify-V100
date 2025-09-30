@@ -61,12 +61,14 @@ export default function Index({
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {pageTitle} {/* ✅ Use the dynamic pageTitle prop */}
           </h2>
-          <Link
-            href={route("project.create")}
-            className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
-          >
-            Ajouter un nouveau
-          </Link>
+          {auth.user.role !== "technicien" && (
+            <Link
+              href={route("project.create")}
+              className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
+            >
+              Ajouter un nouveau
+            </Link>
+          )}
         </div>
       }
     >
@@ -228,18 +230,28 @@ export default function Index({
                             : "—"}
                         </td>
                         <td className="px-3 py-2 text-nowrap">
+                          {auth.user.role !== "technicien" && (
+                            <>
+                              <Link
+                                href={route("project.edit", project.id)}
+                                className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
+                              >
+                                Éditer
+                              </Link>
+                              <button
+                                onClick={() => deleteProject(project)}
+                                className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
+                              >
+                                Supprimer
+                              </button>
+                            </>
+                          )}
                           <Link
-                            href={route("project.edit", project.id)}
+                            href={route("project.show", project.id)}
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                           >
-                            Éditer
+                            Voir
                           </Link>
-                          <button
-                            onClick={() => deleteProject(project)}
-                            className="font-medium text-red-600 dark:text-red-500 hover:underline mx-1"
-                          >
-                            Supprimer
-                          </button>
                         </td>
                       </tr>
                     ))}
