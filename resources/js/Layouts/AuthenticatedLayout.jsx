@@ -1,8 +1,8 @@
 import { useState } from "react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import ApplicationLogo from "../Components/ApplicationLogo";
+import Dropdown from "../Components/Dropdown";
+import NavLink from "../Components/NavLink";
+import ResponsiveNavLink from "../Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
 
 export default function AuthenticatedLayout({ user, header, children }) {
@@ -92,12 +92,16 @@ export default function AuthenticatedLayout({ user, header, children }) {
                   </NavLink>
                 )}
 
-                <NavLink
-                  href={route("notifications.index")}
-                  active={route().current("notifications.index")}
-                >
-                  Notifications
-                </NavLink>
+                {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE 👇 */}
+                {user.role !== "admin" && (
+                  <NavLink
+                    href={route("notifications.index")}
+                    active={route().current("notifications.index")}
+                  >
+                    Notifications
+                  </NavLink>
+                )}
+
                 <NavLink
                   href={route("about")}
                   active={route().current("about")}
@@ -196,6 +200,15 @@ export default function AuthenticatedLayout({ user, header, children }) {
             >
               Dashboard
             </ResponsiveNavLink>
+            {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE (MOBILE VIEW) 👇 */}
+            {user.role !== "admin" && (
+              <ResponsiveNavLink
+                href={route("notifications.index")}
+                active={route().current("notifications.index")}
+              >
+                Notifications
+              </ResponsiveNavLink>
+            )}
           </div>
           <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div className="px-4">
