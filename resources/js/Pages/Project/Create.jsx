@@ -14,7 +14,6 @@ export default function Create({ auth, managers }) {
     status: "",
     description: "",
     due_date: "",
-    project_manager_id: "", // ✅ nouveau champ
   });
 
   const onSubmit = (e) => {

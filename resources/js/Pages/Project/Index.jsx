@@ -61,7 +61,7 @@ export default function Index({
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {pageTitle} {/* ✅ Use the dynamic pageTitle prop */}
           </h2>
-          {auth.user.role !== "technicien" && (
+          {auth.user.role == "technical manager" && (
             <Link
               href={route("project.create")}
               className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
@@ -246,12 +246,6 @@ export default function Index({
                               </button>
                             </>
                           )}
-                          <Link
-                            href={route("project.show", project.id)}
-                            className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
-                          >
-                            Voir
-                          </Link>
                         </td>
                       </tr>
                     ))}

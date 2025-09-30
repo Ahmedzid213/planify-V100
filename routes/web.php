@@ -57,6 +57,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/equipement-assignment', [EquipementAssignmentController::class, 'index'])->name('equipement.assignment.index');
         Route::post('/equipement-assignment/assign', [EquipementAssignmentController::class, 'assign'])->name('equipement.assignment.assign');
         Route::post('/equipement-assignment/unassign/{equipement}', [EquipementAssignmentController::class, 'unassign'])->name('equipement.assignment.unassign');
+        
     });
     
     // Admin Routes
@@ -67,3 +68,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+

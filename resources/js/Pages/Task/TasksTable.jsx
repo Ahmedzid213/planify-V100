@@ -125,7 +125,7 @@ export default function TasksTable({
                   onKeyPress={(e) => onKeyPress("name", e)}
                 />
               </th>
-              <th className="px-3 py-3">
+              <th className=".px-3.py-3">
                 <SelectInput
                   className="w-full"
                   defaultValue={queryParams.status}
@@ -154,7 +154,9 @@ export default function TasksTable({
                   <img src={task.image_path} style={{ width: 60 }} />
                 </td>
                 {!hideProjectColumn && (
-                  <td className="px-3 py-2">{task.project.name}</td>
+                  <td className="px-3 py-2">
+                    {task.project ? task.project.name : "N/A"}
+                  </td>
                 )}
                 <th className="px-3 py-2 text-gray-100 hover:underline">
                   <Link href={route("task.show", task.id)}>{task.name}</Link>
@@ -171,7 +173,9 @@ export default function TasksTable({
                 </td>
                 <td className="px-3 py-2 text-nowrap">{task.created_at}</td>
                 <td className="px-3 py-2 text-nowrap">{task.due_date}</td>
-                <td className="px-3 py-2">{task.createdBy.name}</td>
+                <td className="px-3 py-2">
+                  {task.createdBy ? task.createdBy.name : "N/A"}
+                </td>
                 <td className="px-3 py-2 text-nowrap">
                   <Link
                     href={route("task.edit", task.id)}
