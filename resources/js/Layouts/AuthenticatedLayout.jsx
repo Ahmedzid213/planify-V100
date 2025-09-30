@@ -16,7 +16,13 @@ export default function AuthenticatedLayout({ user, header, children }) {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="shrink-0 flex items-center">
-                <Link href={route("dashboard")}>
+                <Link
+                  href={
+                    user.role === "admin"
+                      ? route("user.index")
+                      : route("dashboard")
+                  }
+                >
                   <img
                     src="/images/logo.jpg"
                     alt="App Logo"
@@ -27,12 +33,14 @@ export default function AuthenticatedLayout({ user, header, children }) {
 
               {/* NAV LINKS SECTION: Corrected structure and classes */}
               <div className="hidden sm:ms-10 sm:flex sm:items-center sm:gap-8">
-                <NavLink
-                  href={route("dashboard")}
-                  active={route().current("dashboard")}
-                >
-                  Dashboard
-                </NavLink>
+                {user.role !== "admin" && (
+                  <NavLink
+                    href={route("dashboard")}
+                    active={route().current("dashboard")}
+                  >
+                    Dashboard
+                  </NavLink>
+                )}
 
                 {user.role === "admin" && (
                   <>
@@ -194,12 +202,15 @@ export default function AuthenticatedLayout({ user, header, children }) {
           }
         >
           <div className="pt-2 pb-3 space-y-1">
-            <ResponsiveNavLink
-              href={route("dashboard")}
-              active={route().current("dashboard")}
-            >
-              Dashboard
-            </ResponsiveNavLink>
+            {/* 👇 HIDE DASHBOARD FROM ADMIN HERE (MOBILE VIEW) 👇 */}
+            {user.role !== "admin" && (
+              <ResponsiveNavLink
+                href={route("dashboard")}
+                active={route().current("dashboard")}
+              >
+                Dashboard
+              </ResponsiveNavLink>
+            )}
             {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE (MOBILE VIEW) 👇 */}
             {user.role !== "admin" && (
               <ResponsiveNavLink
