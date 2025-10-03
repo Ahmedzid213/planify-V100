@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+﻿import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 export default function Index({ auth, notifications }) {
@@ -17,30 +17,44 @@ export default function Index({ auth, notifications }) {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
-              <ul>
-                {notifications.map((notification) => (
-                  <li
-                    key={notification.id}
-                    className="border-b last:border-b-0 py-4"
-                  >
-                    {notification.type === "new_project" && (
-                      <p>
-                        Nouveau projet créé:{" "}
-                        <strong>{notification.data.project_name}</strong>
-                      </p>
-                    )}
-                    {notification.type === "new_task" && (
-                      <p>
-                        Nouvelle tâche créée:{" "}
-                        <strong>{notification.data.task_name}</strong>
-                      </p>
-                    )}
-                    <span className="text-xs text-gray-500">
-                      {new Date(notification.created_at).toLocaleString()}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {notifications.length === 0 ? (
+                <p className="text-sm text-gray-500 dark:text-gray-300">
+                  Aucune notification pour le moment.
+                </p>
+              ) : (
+                <ul>
+                  {notifications.map((notification) => (
+                    <li key={notification.id} className="border-b last:border-b-0 py-4">
+                      {notification.type === "new_project" && (
+                        <p>
+                          Nouveau projet créé : <strong>{notification.data.project_name}</strong>
+                        </p>
+                      )}
+
+                      {notification.type === "new_task" && (
+                        <p>
+                          Nouvelle tâche créée : <strong>{notification.data.task_name}</strong>
+                        </p>
+                      )}
+
+                      {notification.type === "task_assigned" && (
+                        <p>
+                          Tâche assignée : <strong>{notification.data.task_name}</strong>
+                          {notification.data.project_name && (
+                            <span className="text-sm text-gray-500">
+                              {" (Projet : " + notification.data.project_name + ")"}
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      <span className="text-xs text-gray-500">
+                        {new Date(notification.created_at).toLocaleString()}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </div>

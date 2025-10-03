@@ -9,7 +9,26 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image_path', 'name', 'description', 'status', 'due_date', 'created_by', 'updated_by','project_manager_id'];
+    protected $fillable = [
+        'image_path',
+        'name',
+        'description',
+        'status',
+        'due_date',
+        'start_date',
+        'client_name',
+        'client_address',
+        'client_phone',
+        'client_email',
+        'created_by',
+        'updated_by',
+        'project_manager_id',
+    ];
+
+    protected $casts = [
+        'start_date' => 'date',
+        'due_date' => 'date',
+    ];
 
     public function tasks()
     {
@@ -25,8 +44,9 @@ class Project extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
     public function manager()
-{
-return $this->belongsTo(User::class, 'project_manager_id');
-}
+    {
+        return $this->belongsTo(User::class, 'project_manager_id');
+    }
 }

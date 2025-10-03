@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { USER_STATUS_CLASS_MAP, USER_STATUS_TEXT_MAP } from "@/constants.jsx";
-import TasksTable from "../Task/TasksTable";
+import TasksTable from "../ProjectManagerTasks/TasksTable";
 export default function Show({ auth, user, tasks, queryParams }) {
   return (
     <AuthenticatedLayout
@@ -92,8 +92,9 @@ export default function Show({ auth, user, tasks, queryParams }) {
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <TasksTable
                 tasks={tasks}
-                queryParams={queryParams}
-                hideUserColumn={true}
+                filters={queryParams || {}}
+                showActions={false}
+                enableFilters={false}
               />
             </div>
           </div>

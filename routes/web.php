@@ -3,11 +3,14 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipementController;
 use App\Http\Controllers\EquipementAssignmentController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\MyProjectController;
+use App\Http\Controllers\ProjectManagerTaskController;
+use App\Http\Controllers\TechnicalManagerTaskController;
+use App\Http\Controllers\TechnicianTaskController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\TechnicienMiddleware;
 use App\Http\Middleware\TechnicalManagerMiddleware;
@@ -37,29 +40,37 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Technician Routes
     Route::middleware([TechnicienMiddleware::class])->group(function () {
-        Route::get('/task/my-tasks', [TaskController::class, 'myTasks'])->name('task.myTasks');
+        Route::get('/my-tasks', [TechnicianTaskController::class, 'index'])->name('technician.tasks.index');
+        Route::get('/my-tasks/{task}', [TechnicianTaskController::class, 'show'])
+            ->name('technician.tasks.show')
+            ->whereNumber('task');
     });
 
     // Project Manager Routes
     Route::middleware([ProjectManagerMiddleware::class])->group(function () {
-        Route::get('/my-projects', [ProjectController::class, 'myProjects'])->name('project.myProjects');
-        // A project manager can also view projects they are assigned to
-        Route::resource('project', ProjectController::class)->only(['index', 'show']);
-        // A project manager can also manage tasks within their projects
-        Route::resource('task', TaskController::class);
+        Route::get('/my-projects', [MyProjectController::class, 'index'])->name('my-projects.index');
+        Route::get('/my-projects/{project}', [MyProjectController::class, 'show'])
+            ->name('my-projects.show')
+            ->whereNumber('project');
+
+        Route::resource('tasks', ProjectManagerTaskController::class)
+            ->names('project-manager.tasks')
+            ->parameters(['tasks' => 'task']);
     });
 
     // Technical Manager Routes
     Route::middleware([TechnicalManagerMiddleware::class])->group(function () {
-        // A technical manager has full access to projects and tasks
+        Route::get('/tous-les-taches', [TechnicalManagerTaskController::class, 'index'])->name('technical-manager.tasks.index');
+        Route::get('/tous-les-taches/{task}', [TechnicalManagerTaskController::class, 'show'])
+            ->name('technical-manager.tasks.show')
+            ->whereNumber('task');
+
         Route::resource('project', ProjectController::class);
-        Route::resource('task', TaskController::class);
         Route::get('/equipement-assignment', [EquipementAssignmentController::class, 'index'])->name('equipement.assignment.index');
         Route::post('/equipement-assignment/assign', [EquipementAssignmentController::class, 'assign'])->name('equipement.assignment.assign');
         Route::post('/equipement-assignment/unassign/{equipement}', [EquipementAssignmentController::class, 'unassign'])->name('equipement.assignment.unassign');
-        
     });
-    
+
     // Admin Routes
     Route::middleware([AdminMiddleware::class])->group(function () {
         Route::resource('user', UserController::class);

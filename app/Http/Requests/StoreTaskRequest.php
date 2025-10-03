@@ -7,36 +7,33 @@ use Illuminate\Validation\Rule;
 
 class StoreTaskRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        $user = $this->user();
+
+        $projectRule = Rule::exists('projects', 'id');
+
+        if ($user && $user->role === 'project manager') {
+            $projectRule = $projectRule->where(fn ($query) => $query->where('project_manager_id', $user->id));
+        }
+
         return [
-            "name" => ['required', 'max:255'],
-            'image' => ['nullable', 'image'],
-            "description" => ['nullable', 'string'],
+            'name' => ['required', 'string', 'max:255'],
+            'image' => ['nullable', 'file', 'max:5120'],
+            'description' => ['nullable', 'string'],
             'due_date' => ['nullable', 'date'],
-            'project_id' => ['required', 'exists:projects,id'],
-            'assigned_user_id' => ['required', 'exists:users,id'],
-            'status' => [
+            'project_id' => ['required', $projectRule],
+            'assigned_user_id' => [
                 'required',
-                Rule::in(['pending', 'in_progress', 'completed'])
+                Rule::exists('users', 'id')->where(fn ($query) => $query->where('role', 'technicien')),
             ],
-            'priority' => [
-                'required',
-                Rule::in(['low', 'medium', 'high'])
-            ]
+            'status' => ['required', Rule::in(['pending', 'in_progress', 'completed'])],
+            'priority' => ['required', Rule::in(['low', 'medium', 'high'])],
         ];
     }
 }

@@ -1,10 +1,11 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+﻿import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 import {
   PROJECT_STATUS_CLASS_MAP,
   PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
-import TasksTable from "../Task/TasksTable";
+import TasksTable from "../ProjectManagerTasks/TasksTable";
+
 export default function Show({ auth, success, project, tasks, queryParams }) {
   return (
     <AuthenticatedLayout
@@ -27,29 +28,24 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div>
-              <img
-                src={project.image_path}
-                alt=""
-                className="w-full h-64 object-cover"
-              />
-            </div>
-            <div className="p-6 text-gray-900 dark:text-gray-100">
-              <div className="grid gap-1 grid-cols-2 mt-2">
-                <div>
+            {project.image_path && (
+              <div>
+                <img src={project.image_path} alt="" className="w-full h-64 object-cover" />
+              </div>
+            )}
+            <div className="p-6 text-gray-900 dark:text-gray-100 space-y-6">
+              <div className="grid gap-6 lg:grid-cols-2">
+                <div className="space-y-4">
                   <div>
-                    <label className="font-bold text-lg">ID Projet</label>
+                    <p className="font-bold text-lg">ID Projet</p>
                     <p className="mt-1">{project.id}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">Nom du Projet</label>
+                  <div>
+                    <p className="font-bold text-lg">Nom du Projet</p>
                     <p className="mt-1">{project.name}</p>
                   </div>
-
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      Statut du Projet
-                    </label>
+                  <div>
+                    <p className="font-bold text-lg">Statut du Projet</p>
                     <p className="mt-1">
                       <span
                         className={
@@ -61,34 +57,67 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                       </span>
                     </p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">Créé par</label>
-                    <p className="mt-1">{project.createdBy.name}</p>
+                  <div>
+                    <p className="font-bold text-lg">Créé par</p>
+                    <p className="mt-1">{project.createdBy?.name}</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Mis à jour par</p>
+                    <p className="mt-1">{project.updatedBy?.name}</p>
                   </div>
                 </div>
-                <div>
+
+                <div className="space-y-4">
                   <div>
-                    <label className="font-bold text-lg">Date d'échéance</label>
-                    <p className="mt-1">{project.due_date}</p>
+                    <p className="font-bold text-lg">Date de début</p>
+                    <p className="mt-1">{project.start_date || "Non définie"}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      Date de création
-                    </label>
+                  <div>
+                    <p className="font-bold text-lg">Date d'échéance</p>
+                    <p className="mt-1">{project.due_date || "Non définie"}</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-lg">Date de création</p>
                     <p className="mt-1">{project.created_at}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">Modifié par</label>
-                    <p className="mt-1">{project.updatedBy.name}</p>
+                  <div>
+                    <p className="font-bold text-lg">Chef de projet</p>
+                    <p className="mt-1">
+                      {project.manager ? (
+                        <span>{`${project.manager.name} (${project.manager.email})`}</span>
+                      ) : (
+                        "—"
+                      )}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4">
-                <label className="font-bold text-lg">
-                  Description du Projet
-                </label>
-                <p className="mt-1">{project.description}</p>
+              <div>
+                <p className="font-bold text-lg">Informations client</p>
+                <div className="mt-2 grid gap-3 md:grid-cols-2">
+                  <div>
+                    <p className="text-sm text-gray-500">Nom</p>
+                    <p>{project.client_name || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Email</p>
+                    <p>{project.client_email || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Téléphone</p>
+                    <p>{project.client_phone || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Adresse</p>
+                    <p>{project.client_address || "—"}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-bold text-lg">Description du Projet</p>
+                <p className="mt-1 whitespace-pre-line">{project.description}</p>
               </div>
             </div>
           </div>
@@ -102,8 +131,11 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
               <TasksTable
                 tasks={tasks}
                 success={success}
-                queryParams={queryParams}
-                hideProjectColumn={true}
+                filters={queryParams || {}}
+                showProjectColumn={false}
+                showCreatedByColumn={false}
+                showActions={false}
+                enableFilters={false}
               />
             </div>
           </div>

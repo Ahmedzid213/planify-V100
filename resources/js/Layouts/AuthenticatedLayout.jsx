@@ -61,8 +61,8 @@ export default function AuthenticatedLayout({ user, header, children }) {
 
                 {user.role === "technicien" && (
                   <NavLink
-                    href={route("task.myTasks")}
-                    active={route().current("task.myTasks")}
+                    href={route("technician.tasks.index")}
+                    active={route().current("technician.tasks.*")}
                   >
                     Mes Tâches
                   </NavLink>
@@ -77,8 +77,8 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       Projets
                     </NavLink>
                     <NavLink
-                      href={route("task.index")}
-                      active={route().current("task.index")}
+                      href={route("technical-manager.tasks.index")}
+                      active={route().current("technical-manager.tasks.*")}
                     >
                       Toutes les Tâches
                     </NavLink>
@@ -92,12 +92,20 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 )}
 
                 {user.is_project_manager && (
-                  <NavLink
-                    href={route("project.myProjects")}
-                    active={route().current("project.myProjects")}
-                  >
-                    My Projects
-                  </NavLink>
+                  <>
+                    <NavLink
+                      href={route("my-projects.index")}
+                      active={route().current("my-projects.*")}
+                    >
+                      My Projects
+                    </NavLink>
+                    <NavLink
+                      href={route("project-manager.tasks.index")}
+                      active={route().current("project-manager.tasks.*")}
+                    >
+                      Tasks
+                    </NavLink>
+                  </>
                 )}
 
                 {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE 👇 */}

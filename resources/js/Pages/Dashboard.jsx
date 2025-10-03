@@ -86,7 +86,7 @@ export default function Dashboard({
                         </Link>
                       </td>
                       <td className="px-3 py-2 text-white hover:underline">
-                        <Link href={route("task.show", task.id)}>
+                        <Link href={route("project-manager.tasks.show", task.id)}>
                           {task.name}
                         </Link>
                       </td>
