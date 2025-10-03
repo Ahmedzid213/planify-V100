@@ -42,12 +42,12 @@ export default function Index({
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
     }
-    // Ã¢Å“â€¦ Use the current page's URL for sorting
+
     router.get(window.location.pathname, queryParams);
   };
 
   const deleteProject = (project) => {
-    if (!window.confirm("Are you sure you want to delete the project?")) {
+    if (!window.confirm("vous voulez supprimer ce projet?")) {
       return;
     }
     router.delete(route("project.destroy", project.id));
@@ -59,7 +59,7 @@ export default function Index({
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {pageTitle} {/* Ã¢Å“â€¦ Use the dynamic pageTitle prop */}
+            {pageTitle}
           </h2>
           {auth.user.role == "technical manager" && (
             <Link
@@ -73,7 +73,6 @@ export default function Index({
       }
     >
       <Head title={pageTitle} />{" "}
-      {/* Ã¢Å“â€¦ Use the dynamic pageTitle for the Head */}
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {success && (
@@ -145,7 +144,7 @@ export default function Index({
                       >
                         Client
                       </TableHeading>
-                      <th className="px-3 py-3">CrÃ©Ã© par</th>
+                      <th className="px-3 py-3">Créé par</th>
                       <th className="px-3 py-3">Manager</th>
                       <th className="px-3 py-3 text-right">Actions</th>
                     </tr>
@@ -174,10 +173,10 @@ export default function Index({
                             searchFieldChanged("status", e.target.value)
                           }
                         >
-                          <option value="">SÃ©lectionner Statut</option>
+                          <option value="">Sélectionner Statut</option>
                           <option value="pending">En attente</option>
                           <option value="in_progress">En cours</option>
-                          <option value="completed">TerminÃ©</option>
+                          <option value="completed">Terminé</option>
                         </SelectInput>
                       </th>
                       <th className="px-3 py-3"></th>
@@ -193,7 +192,7 @@ export default function Index({
                             searchFieldChanged("manager_id", e.target.value)
                           }
                         >
-                          <option value="">SÃ©lectionner Manager</option>
+                          <option value="">Sélectionner Manager</option>
                           {managers.map((m) => (
                             <option key={m.id} value={m.id}>
                               {m.name}

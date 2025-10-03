@@ -38,7 +38,11 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             {project.image_path && (
               <div>
-                <img src={project.image_path} alt="" className="w-full h-64 object-cover" />
+                <img
+                  src={project.image_path}
+                  alt=""
+                  className="w-full h-64 object-cover"
+                />
               </div>
             )}
             <div className="p-6 text-gray-900 dark:text-gray-100 space-y-6">
@@ -78,7 +82,9 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                 <div className="space-y-4">
                   <div>
                     <p className="font-bold text-lg">Date de debut</p>
-                    <p className="mt-1">{project.start_date || "Non definie"}</p>
+                    <p className="mt-1">
+                      {project.start_date || "Non definie"}
+                    </p>
                   </div>
                   <div>
                     <p className="font-bold text-lg">Date d'echeance</p>
@@ -125,7 +131,9 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
 
               <div>
                 <p className="font-bold text-lg">Description du Projet</p>
-                <p className="mt-1 whitespace-pre-line">{project.description}</p>
+                <p className="mt-1 whitespace-pre-line">
+                  {project.description}
+                </p>
               </div>
             </div>
           </div>
@@ -154,7 +162,7 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
             <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-              Files
+              Fichiers
             </h3>
             <div className="mt-6 space-y-4">
               {project.files &&

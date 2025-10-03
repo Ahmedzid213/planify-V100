@@ -30,7 +30,7 @@ export default function Index({
   };
 
   const unassignEquipement = (equipementId) => {
-    if (!confirm("Are you sure you want to unassign this equipment?")) {
+    if (!confirm("Voulez-vous vraiment désassigner cet équipement ?")) {
       return;
     }
 
@@ -42,7 +42,8 @@ export default function Index({
   const statusBadge = (equipement) => (
     <span
       className={`px-2 py-1 rounded-full text-xs font-semibold ${
-        STATUS_BADGE_CLASSES[equipement.status] ?? "bg-slate-500/10 text-slate-500"
+        STATUS_BADGE_CLASSES[equipement.status] ??
+        "bg-slate-500/10 text-slate-500"
       }`}
     >
       {equipement.status_label}
@@ -54,11 +55,11 @@ export default function Index({
       user={auth.user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Equipment assignment
+          Assignment d'équipement
         </h2>
       }
     >
-      <Head title="Equipment assignment" />
+      <Head title="Assignment d'équipement" />
 
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -74,7 +75,7 @@ export default function Index({
                 <div className="grid gap-6 lg:grid-cols-2">
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                      Available equipment
+                      Équipement disponible
                     </h3>
                     <select
                       name="equipement_id"
@@ -83,7 +84,7 @@ export default function Index({
                       className="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
                       onChange={(e) => setData("equipement_id", e.target.value)}
                     >
-                      <option value="">Select a piece of equipment</option>
+                      <option value="">Sélectionner un équipement</option>
                       {freeEquipements.map((equipement) => (
                         <option
                           key={equipement.id}
@@ -102,7 +103,7 @@ export default function Index({
                     )}
                     {freeEquipements.length === 0 && (
                       <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                        No equipment is currently available.
+                        Aucun équipement n'est actuellement disponible.
                       </p>
                     )}
                   </div>
@@ -118,7 +119,7 @@ export default function Index({
                       className="mt-2 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
                       onChange={(e) => setData("user_id", e.target.value)}
                     >
-                      <option value="">Select a user</option>
+                      <option value="">Sélectionner un utilisateur</option>
                       {users.map((user) => (
                         <option key={user.id} value={user.id}>
                           {user.name}
@@ -126,7 +127,9 @@ export default function Index({
                       ))}
                     </select>
                     {errors.user_id && (
-                      <p className="mt-2 text-sm text-rose-500">{errors.user_id}</p>
+                      <p className="mt-2 text-sm text-rose-500">
+                        {errors.user_id}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -137,14 +140,14 @@ export default function Index({
                     disabled={processing}
                     className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600 disabled:opacity-60"
                   >
-                    Assign equipment
+                    Assigner équipement
                   </button>
                 </div>
               </form>
 
               <div>
                 <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
-                  Free equipment overview
+                  Équipement disponible
                 </h4>
                 <div className="mt-3 grid gap-3 md:grid-cols-2">
                   {freeEquipements.map((equipement) => (
@@ -165,7 +168,7 @@ export default function Index({
                   ))}
                   {freeEquipements.length === 0 && (
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      No free equipment.
+                      Aucun équipement n'est actuellement disponible.
                     </p>
                   )}
                 </div>
@@ -176,15 +179,15 @@ export default function Index({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Equipment in use
+                Équipement en cours d'utilisation
               </h3>
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                     <tr>
-                      <th className="px-3 py-3">Equipment</th>
-                      <th className="px-3 py-3">Status</th>
-                      <th className="px-3 py-3">Assigned to</th>
+                      <th className="px-3 py-3">Équipement</th>
+                      <th className="px-3 py-3">Statut</th>
+                      <th className="px-3 py-3">Assigné à</th>
                       <th className="px-3 py-3 text-right">Actions</th>
                     </tr>
                   </thead>
@@ -195,12 +198,15 @@ export default function Index({
                           className="px-3 py-4 text-center text-gray-500 dark:text-gray-400"
                           colSpan={4}
                         >
-                          No equipment is currently assigned.
+                          Aucun équipement n'est actuellement assigné.
                         </td>
                       </tr>
                     )}
                     {inUseEquipements.map((equipement) => (
-                      <tr key={equipement.id} className="border-b border-gray-100 dark:border-gray-700">
+                      <tr
+                        key={equipement.id}
+                        className="border-b border-gray-100 dark:border-gray-700"
+                      >
                         <td className="px-3 py-3 text-gray-900 dark:text-gray-100">
                           {equipement.name}
                         </td>
@@ -214,7 +220,7 @@ export default function Index({
                             disabled={unassignProcessing}
                             className="font-medium text-rose-500 hover:text-rose-400 disabled:opacity-50"
                           >
-                            Unassign
+                            Désassigner
                           </button>
                         </td>
                       </tr>
