@@ -86,7 +86,7 @@ export default function Index({
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   {/* En-tête */}
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
-                    <tr className="text-nowrap">
+                    <tr className="whitespace-nowrap">
                       <TableHeading
                         name="id"
                         sort_field={queryParams.sort_field}
@@ -95,7 +95,7 @@ export default function Index({
                       >
                         ID
                       </TableHeading>
-                      <th className="px-3 py-3">Image</th>
+                      <th className="px-4 py-3 whitespace-nowrap">Image</th>
                       <TableHeading
                         name="name"
                         sort_field={queryParams.sort_field}
@@ -144,17 +144,17 @@ export default function Index({
                       >
                         Client
                       </TableHeading>
-                      <th className="px-3 py-3">Créé par</th>
-                      <th className="px-3 py-3">Manager</th>
-                      <th className="px-3 py-3 text-right">Actions</th>
+                      <th className="px-4 py-3 whitespace-nowrap">Créé par</th>
+                      <th className="px-4 py-3 whitespace-nowrap">Manager</th>
+                      <th className="px-4 py-3 whitespace-nowrap text-right">Actions</th>
                     </tr>
                   </thead>
                   {/* Filtres */}
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
-                    <tr className="text-nowrap">
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3">
+                    <tr className="whitespace-nowrap">
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap">
                         <TextInput
                           className="w-full"
                           defaultValue={queryParams.name}
@@ -165,7 +165,7 @@ export default function Index({
                           onKeyPress={(e) => onKeyPress("name", e)}
                         />
                       </th>
-                      <th className="px-3 py-3">
+                      <th className="px-4 py-3 whitespace-nowrap">
                         <SelectInput
                           className="w-full"
                           defaultValue={queryParams.status}
@@ -179,12 +179,12 @@ export default function Index({
                           <option value="completed">Terminé</option>
                         </SelectInput>
                       </th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3"></th>
-                      <th className="px-3 py-3">
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
+                      <th className="px-4 py-3 whitespace-nowrap">
                         <SelectInput
                           className="w-full"
                           defaultValue={queryParams.manager_id}
@@ -200,7 +200,7 @@ export default function Index({
                           ))}
                         </SelectInput>
                       </th>
-                      <th className="px-3 py-3"></th>
+                      <th className="px-4 py-3 whitespace-nowrap"></th>
                     </tr>
                   </thead>
 
@@ -211,16 +211,16 @@ export default function Index({
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         key={project.id}
                       >
-                        <td className="px-3 py-2">{project.id}</td>
-                        <td className="px-3 py-2">
+                        <td className="px-4 py-2 whitespace-nowrap">{project.id}</td>
+                        <td className="px-4 py-2 whitespace-nowrap">
                           <img src={project.image_path} style={{ width: 60 }} />
                         </td>
-                        <th className="px-3 py-2 text-gray-100 text-nowrap hover:underline">
+                        <th className="px-4 py-2 whitespace-nowrap text-gray-100 hover:underline">
                           <Link href={route("project.show", project.id)}>
                             {project.name}
                           </Link>
                         </th>
-                        <td className="px-3 py-2">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           <span
                             className={
                               "px-2 py-1 rounded text-white " +
@@ -230,28 +230,28 @@ export default function Index({
                             {PROJECT_STATUS_TEXT_MAP[project.status]}
                           </span>
                         </td>
-                        <td className="px-3 py-2 text-nowrap">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.created_at}
                         </td>
-                        <td className="px-3 py-2 text-nowrap">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.start_date || "Not set"}
                         </td>
-                        <td className="px-3 py-2 text-nowrap">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.due_date || "Not set"}
                         </td>
-                        <td className="px-3 py-2">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.client_name || "—"}
                         </td>
-                        <td className="px-3 py-2">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.createdBy?.name ?? "—"}
                         </td>
                         {/* affichage Manager */}
-                        <td className="px-3 py-2">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {project.manager
                             ? `${project.manager.name} (${project.manager.email})`
                             : "—"}
                         </td>
-                        <td className="px-3 py-2 text-nowrap">
+                        <td className="px-4 py-2 whitespace-nowrap">
                           {auth.user.role !== "technicien" && (
                             <>
                               <Link
