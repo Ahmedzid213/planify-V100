@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-﻿import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
-=======
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, router } from "@inertiajs/react";
->>>>>>> de514085834f03fb9afa34d9fc265c4e77b2b377
 import {
   PROJECT_STATUS_CLASS_MAP,
   PROJECT_STATUS_TEXT_MAP,
 } from "@/constants.jsx";
-<<<<<<< HEAD
 import TasksTable from "../ProjectManagerTasks/TasksTable";
-=======
-import TasksTable from "../Task/TasksTable";
 import FileUpload from "@/Components/FileUpload";
 import FileCard from "@/Components/FileCard";
->>>>>>> de514085834f03fb9afa34d9fc265c4e77b2b377
 
 export default function Show({ auth, success, project, tasks, queryParams }) {
   const handleDelete = (file) => {
@@ -75,26 +66,26 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                     </p>
                   </div>
                   <div>
-                    <p className="font-bold text-lg">Créé par</p>
-                    <p className="mt-1">{project.createdBy?.name}</p>
+                    <p className="font-bold text-lg">Cree par</p>
+                    <p className="mt-1">{project.createdBy?.name || "N/A"}</p>
                   </div>
                   <div>
-                    <p className="font-bold text-lg">Mis à jour par</p>
-                    <p className="mt-1">{project.updatedBy?.name}</p>
+                    <p className="font-bold text-lg">Mis a jour par</p>
+                    <p className="mt-1">{project.updatedBy?.name || "N/A"}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <p className="font-bold text-lg">Date de début</p>
-                    <p className="mt-1">{project.start_date || "Non définie"}</p>
+                    <p className="font-bold text-lg">Date de debut</p>
+                    <p className="mt-1">{project.start_date || "Non definie"}</p>
                   </div>
                   <div>
-                    <p className="font-bold text-lg">Date d'échéance</p>
-                    <p className="mt-1">{project.due_date || "Non définie"}</p>
+                    <p className="font-bold text-lg">Date d'echeance</p>
+                    <p className="mt-1">{project.due_date || "Non definie"}</p>
                   </div>
                   <div>
-                    <p className="font-bold text-lg">Date de création</p>
+                    <p className="font-bold text-lg">Date de creation</p>
                     <p className="mt-1">{project.created_at}</p>
                   </div>
                   <div>
@@ -103,7 +94,7 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                       {project.manager ? (
                         <span>{`${project.manager.name} (${project.manager.email})`}</span>
                       ) : (
-                        "—"
+                        "N/A"
                       )}
                     </p>
                   </div>
@@ -115,19 +106,19 @@ export default function Show({ auth, success, project, tasks, queryParams }) {
                 <div className="mt-2 grid gap-3 md:grid-cols-2">
                   <div>
                     <p className="text-sm text-gray-500">Nom</p>
-                    <p>{project.client_name || "—"}</p>
+                    <p>{project.client_name || "N/A"}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
-                    <p>{project.client_email || "—"}</p>
+                    <p>{project.client_email || "N/A"}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Téléphone</p>
-                    <p>{project.client_phone || "—"}</p>
+                    <p className="text-sm text-gray-500">Telephone</p>
+                    <p>{project.client_phone || "N/A"}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Adresse</p>
-                    <p>{project.client_address || "—"}</p>
+                    <p>{project.client_address || "N/A"}</p>
                   </div>
                 </div>
               </div>
