@@ -15,7 +15,7 @@ export default function Index({
   managers,
   queryParams = null,
   success,
-  pageTitle = "Projets", // âœ… Default title is "Projets"
+  pageTitle = "Projets", // Ã¢Å“â€¦ Default title is "Projets"
 }) {
   queryParams = queryParams || {};
 
@@ -25,7 +25,7 @@ export default function Index({
     } else {
       delete queryParams[name];
     }
-    // âœ… Use the current page's URL for filtering
+    // Ã¢Å“â€¦ Use the current page's URL for filtering
     router.get(window.location.pathname, queryParams);
   };
 
@@ -42,7 +42,7 @@ export default function Index({
       queryParams.sort_field = name;
       queryParams.sort_direction = "asc";
     }
-    // âœ… Use the current page's URL for sorting
+    // Ã¢Å“â€¦ Use the current page's URL for sorting
     router.get(window.location.pathname, queryParams);
   };
 
@@ -59,7 +59,7 @@ export default function Index({
       header={
         <div className="flex justify-between items-center">
           <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {pageTitle} {/* âœ… Use the dynamic pageTitle prop */}
+            {pageTitle} {/* Ã¢Å“â€¦ Use the dynamic pageTitle prop */}
           </h2>
           {auth.user.role == "technical manager" && (
             <Link
@@ -73,7 +73,7 @@ export default function Index({
       }
     >
       <Head title={pageTitle} />{" "}
-      {/* âœ… Use the dynamic pageTitle for the Head */}
+      {/* Ã¢Å“â€¦ Use the dynamic pageTitle for the Head */}
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
           {success && (
@@ -85,8 +85,7 @@ export default function Index({
             <div className="p-6 text-gray-900 dark:text-gray-100">
               <div className="overflow-auto">
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                  {/* ... rest of your table code remains the same ... */}
-                  {/* En-tÃªte */}
+                  {/* En-tête */}
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                     <tr className="text-nowrap">
                       <TableHeading
@@ -128,7 +127,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Date de début
+                        Date de debut
                       </TableHeading>
                       <TableHeading
                         name="due_date"
@@ -146,7 +145,7 @@ export default function Index({
                       >
                         Client
                       </TableHeading>
-                      <th className="px-3 py-3">Créé par</th>
+                      <th className="px-3 py-3">CrÃ©Ã© par</th>
                       <th className="px-3 py-3">Manager</th>
                       <th className="px-3 py-3 text-right">Actions</th>
                     </tr>
@@ -175,10 +174,10 @@ export default function Index({
                             searchFieldChanged("status", e.target.value)
                           }
                         >
-                          <option value="">Sélectionner Statut</option>
+                          <option value="">SÃ©lectionner Statut</option>
                           <option value="pending">En attente</option>
                           <option value="in_progress">En cours</option>
-                          <option value="completed">Terminé</option>
+                          <option value="completed">TerminÃ©</option>
                         </SelectInput>
                       </th>
                       <th className="px-3 py-3"></th>
@@ -194,7 +193,7 @@ export default function Index({
                             searchFieldChanged("manager_id", e.target.value)
                           }
                         >
-                          <option value="">Sélectionner Manager</option>
+                          <option value="">SÃ©lectionner Manager</option>
                           {managers.map((m) => (
                             <option key={m.id} value={m.id}>
                               {m.name}
@@ -232,7 +231,7 @@ export default function Index({
                             {PROJECT_STATUS_TEXT_MAP[project.status]}
                           </span>
                         </td>
-                                                                        <td className="px-3 py-2 text-nowrap">
+                        <td className="px-3 py-2 text-nowrap">
                           {project.created_at}
                         </td>
                         <td className="px-3 py-2 text-nowrap">
@@ -241,13 +240,17 @@ export default function Index({
                         <td className="px-3 py-2 text-nowrap">
                           {project.due_date || "Not set"}
                         </td>
-                        <td className="px-3 py-2">{project.client_name || "�"}</td>
-                        <td className="px-3 py-2">{project.createdBy?.name ?? "�"}</td>
+                        <td className="px-3 py-2">
+                          {project.client_name || "—"}
+                        </td>
+                        <td className="px-3 py-2">
+                          {project.createdBy?.name ?? "—"}
+                        </td>
                         {/* affichage Manager */}
                         <td className="px-3 py-2">
                           {project.manager
                             ? `${project.manager.name} (${project.manager.email})`
-                            : "�"}
+                            : "—"}
                         </td>
                         <td className="px-3 py-2 text-nowrap">
                           {auth.user.role !== "technicien" && (
@@ -256,7 +259,7 @@ export default function Index({
                                 href={route("project.edit", project.id)}
                                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                               >
-                                Ã‰diter
+                                Editer
                               </Link>
                               <button
                                 onClick={() => deleteProject(project)}
@@ -280,7 +283,3 @@ export default function Index({
     </AuthenticatedLayout>
   );
 }
-
-
-
-

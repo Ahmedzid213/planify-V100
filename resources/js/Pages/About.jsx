@@ -58,10 +58,10 @@ export default function About({ auth }) {
                   Notre Mission
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 max-w-3xl mx-auto text-center">
-                  Notre mission est de permettre aux équipes d'atteindre leurs
+                  Notre mission est de permettre aux Ã©quipes d'atteindre leurs
                   objectifs en fournissant des logiciels de gestion de projet
                   intuitifs, flexibles et puissants. Nous croyons qu'avec les
-                  bons outils, toute équipe peut accomplir des choses
+                  bons outils, toute Ã©quipe peut accomplir des choses
                   incroyables.
                 </p>
                 {/* Follow Us Section */}

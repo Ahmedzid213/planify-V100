@@ -107,7 +107,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        Date de création
+                        Date de crÃ©ation
                       </TableHeading>
 
                       <th className="px-3 py-3 text-right">Actions</th>
@@ -161,7 +161,7 @@ export default function Index({ auth, users, queryParams = null, success }) {
                             href={route("user.edit", user.id)}
                             className="font-medium text-blue-600 dark:text-blue-500 hover:underline mx-1"
                           >
-                            Éditer
+                            Ã‰diter
                           </Link>
                           <button
                             onClick={(e) => deleteUser(user)}

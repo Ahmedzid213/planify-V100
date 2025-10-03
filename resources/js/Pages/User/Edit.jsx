@@ -11,7 +11,7 @@ export default function Edit({ auth, user }) {
     email: user.email || "",
     password: "",
     password_confirmation: "",
-    role: user.role || "user", // ✅ Ajout du champ role
+    role: user.role || "user", // âœ… Ajout du champ role
     _method: "PUT",
   });
 
@@ -114,7 +114,7 @@ export default function Edit({ auth, user }) {
                 />
               </div>
 
-              {/* ✅ Role */}
+              {/* âœ… Role */}
               <div className="mt-4">
                 <InputLabel htmlFor="user_role" value="Role" />
                 <select

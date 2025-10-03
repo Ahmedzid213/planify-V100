@@ -144,7 +144,7 @@ export default function Index({
                         sort_direction={queryParams.sort_direction}
                         sortChanged={sortChanged}
                       >
-                        N° serie
+                        NÂ° serie
                       </TableHeading>
                       <TableHeading
                         name="status"

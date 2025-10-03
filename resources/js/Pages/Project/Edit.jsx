@@ -91,7 +91,7 @@ export default function Edit({ auth, project, managers }) {
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <InputLabel htmlFor="project_start_date" value="Date de début du projet" />
+                  <InputLabel htmlFor="project_start_date" value="Date de dÃ©but du projet" />
                   <TextInput
                     id="project_start_date"
                     type="date"
@@ -103,7 +103,7 @@ export default function Edit({ auth, project, managers }) {
                   <InputError message={errors.start_date} className="mt-2" />
                 </div>
                 <div>
-                  <InputLabel htmlFor="project_due_date" value="Date d'échéance du projet" />
+                  <InputLabel htmlFor="project_due_date" value="Date d'Ã©chÃ©ance du projet" />
                   <TextInput
                     id="project_due_date"
                     type="date"
@@ -157,7 +157,7 @@ export default function Edit({ auth, project, managers }) {
                   <InputError message={errors.client_address} className="mt-2" />
                 </div>
                 <div>
-                  <InputLabel htmlFor="client_phone" value="Téléphone du client" />
+                  <InputLabel htmlFor="client_phone" value="TÃ©lÃ©phone du client" />
                   <TextInput
                     id="client_phone"
                     type="text"
@@ -179,16 +179,16 @@ export default function Edit({ auth, project, managers }) {
                   className="mt-1 block w-full"
                   onChange={(event) => setData("status", event.target.value)}
                 >
-                  <option value="">Sélectionner Statut</option>
+                  <option value="">SÃ©lectionner Statut</option>
                   <option value="pending">En attente</option>
                   <option value="in_progress">En cours</option>
-                  <option value="completed">Terminé</option>
+                  <option value="completed">TerminÃ©</option>
                 </SelectInput>
                 <InputError message={errors.status} className="mt-2" />
               </div>
 
               <div>
-                <InputLabel htmlFor="project_manager_id" value="Utilisateur assigné (Chef de projet)" />
+                <InputLabel htmlFor="project_manager_id" value="Utilisateur assignÃ© (Chef de projet)" />
                 <select
                   id="project_manager_id"
                   name="project_manager_id"
@@ -196,7 +196,7 @@ export default function Edit({ auth, project, managers }) {
                   onChange={(event) => setData("project_manager_id", event.target.value)}
                   className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                 >
-                  <option value="">— None —</option>
+                  <option value="">â€” None â€”</option>
                   {managers.map((manager) => (
                     <option key={manager.id} value={manager.id}>
                       {manager.name} ({manager.email})

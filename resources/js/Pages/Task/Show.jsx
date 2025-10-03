@@ -52,17 +52,17 @@ export default function Show({ auth, task }) {
               <div className="grid gap-1 grid-cols-2 mt-2">
                 <div>
                   <div>
-                    <label className="font-bold text-lg">ID de la tâche</label>
+                    <label className="font-bold text-lg">ID de la tÃ¢che</label>
                     <p className="mt-1">{taskData.id}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Nom de la tâche</label>
+                    <label className="font-bold text-lg">Nom de la tÃ¢che</label>
                     <p className="mt-1">{taskData.name}</p>
                   </div>
 
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Statut de la tâche
+                      Statut de la tÃ¢che
                     </label>
                     <p className="mt-1">
                       <span
@@ -78,7 +78,7 @@ export default function Show({ auth, task }) {
 
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Priorité de la tâche
+                      PrioritÃ© de la tÃ¢che
                     </label>
                     <p className="mt-1">
                       <span
@@ -92,23 +92,23 @@ export default function Show({ auth, task }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Créé par</label>
+                    <label className="font-bold text-lg">CrÃ©Ã© par</label>
                     <p className="mt-1">{taskData.createdBy.name}</p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Date d'échéance</label>
+                    <label className="font-bold text-lg">Date d'Ã©chÃ©ance</label>
                     <p className="mt-1">{taskData.due_date}</p>
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Date de création
+                      Date de crÃ©ation
                     </label>
                     <p className="mt-1">{taskData.created_at}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Modifié par</label>
+                    <label className="font-bold text-lg">ModifiÃ© par</label>
                     <p className="mt-1">{taskData.updatedBy.name}</p>
                   </div>
                   <div className="mt-4">
@@ -124,7 +124,7 @@ export default function Show({ auth, task }) {
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Utilisateur assigné
+                      Utilisateur assignÃ©
                     </label>
                     <p className="mt-1">{taskData.assignedUser.name}</p>
                   </div>
@@ -133,7 +133,7 @@ export default function Show({ auth, task }) {
 
               <div className="mt-4">
                 <label className="font-bold text-lg">
-                  Description de la tâche
+                  Description de la tÃ¢che
                 </label>
                 <p className="mt-1">{taskData.description}</p>
               </div>

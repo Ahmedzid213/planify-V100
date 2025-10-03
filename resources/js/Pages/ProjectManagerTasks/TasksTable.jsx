@@ -1,4 +1,4 @@
-﻿import Pagination from "@/Components/Pagination";
+import Pagination from "@/Components/Pagination";
 import SelectInput from "@/Components/SelectInput";
 import TextInput from "@/Components/TextInput";
 import TableHeading from "@/Components/TableHeading";

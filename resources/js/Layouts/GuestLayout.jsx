@@ -8,12 +8,12 @@ export default function Guest({ children }) {
         <Link href={route("dashboard")}>
           <img
             src="/images/logo.jpg"
-            alt="App Logo"
+            alt="Logo de l'application"
             className="h-20 w-auto inline-block"
           />
         </Link>
         <p className="mt-2 text-lg text-gray-600 dark:text-gray-300 font-semibold">
-          Vision. Managed.
+          Vision maitrisee.
         </p>
       </div>
 
@@ -21,8 +21,7 @@ export default function Guest({ children }) {
         {children}
       </div>
       <div className="text-center text-gray-500 dark:text-gray-400 text-sm mt-6">
-        © {new Date().getFullYear()} Planify(PFE ZID AHMED + FADLA WAIL RACHAD).
-        All rights reserved.
+        Copyright {new Date().getFullYear()} Planify (PFE ZID AHMED + FADLA WAIL RACHAD). Tous droits reserves.
       </div>
     </div>
   );

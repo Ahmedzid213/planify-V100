@@ -53,23 +53,23 @@ export default function Show({ auth, user, tasks, queryParams }) {
                     </p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Créé par</label>
+                    <label className="font-bold text-lg">CrÃ©Ã© par</label>
                     <p className="mt-1">{user.createdBy.name}</p>
                   </div>
                 </div>
                 <div>
                   <div>
-                    <label className="font-bold text-lg">Date d'échéance</label>
+                    <label className="font-bold text-lg">Date d'Ã©chÃ©ance</label>
                     <p className="mt-1">{user.due_date}</p>
                   </div>
                   <div className="mt-4">
                     <label className="font-bold text-lg">
-                      Date de création
+                      Date de crÃ©ation
                     </label>
                     <p className="mt-1">{user.created_at}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Mis à jour par</label>
+                    <label className="font-bold text-lg">Mis Ã  jour par</label>
                     <p className="mt-1">{user.updatedBy.name}</p>
                   </div>
                 </div>

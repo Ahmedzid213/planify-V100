@@ -1,4 +1,4 @@
-﻿import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import SelectInput from "@/Components/SelectInput";
 import { Head, router } from "@inertiajs/react";
 import TasksTable from "../ProjectManagerTasks/TasksTable";

@@ -4,9 +4,9 @@ export const PROJECT_STATUS_CLASS_MAP = {
   completed: "bg-green-500",
 };
 export const PROJECT_STATUS_TEXT_MAP = {
-  pending: "Pending",
-  in_progress: "In Progress",
-  completed: "Completed",
+  pending: "En attente",
+  in_progress: "En cours",
+  completed: "Termine",
 };
 export const TASK_STATUS_CLASS_MAP = {
   pending: "bg-amber-500",
@@ -14,9 +14,9 @@ export const TASK_STATUS_CLASS_MAP = {
   completed: "bg-green-500",
 };
 export const TASK_STATUS_TEXT_MAP = {
-  pending: "Pending",
-  in_progress: "In Progress",
-  completed: "Completed",
+  pending: "En attente",
+  in_progress: "En cours",
+  completed: "Termine",
 };
 export const TASK_PRIORITY_CLASS_MAP = {
   low: "bg-gray-600",
@@ -24,20 +24,20 @@ export const TASK_PRIORITY_CLASS_MAP = {
   high: "bg-red-600",
 };
 export const TASK_PRIORITY_TEXT_MAP = {
-  low: "Low",
-  medium: "Medium",
-  high: "High",
+  low: "Faible",
+  medium: "Moyen",
+  high: "Eleve",
 };
 export const USER_STATUS_CLASS_MAP = {
-    active: "bg-green-100 text-green-800",
-    inactive: "bg-gray-100 text-gray-800",
-    pending: "bg-yellow-100 text-yellow-800",
-    banned: "bg-red-100 text-red-800",
+  active: "bg-green-100 text-green-800",
+  inactive: "bg-gray-100 text-gray-800",
+  pending: "bg-yellow-100 text-yellow-800",
+  banned: "bg-red-100 text-red-800",
 };
 
 export const USER_STATUS_TEXT_MAP = {
-    active: "Actif",
-    inactive: "Inactif",
-    pending: "En attente",
-    banned: "Banni",
+  active: "Actif",
+  inactive: "Inactif",
+  pending: "En attente",
+  banned: "Banni",
 };

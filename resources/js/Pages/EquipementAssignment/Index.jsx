@@ -90,7 +90,7 @@ export default function Index({
                           value={equipement.id}
                           disabled={!equipement.assignable}
                         >
-                          {equipement.name} — {equipement.status_label}
+                          {equipement.name} â€” {equipement.status_label}
                           {!equipement.assignable ? " (not assignable)" : ""}
                         </option>
                       ))}

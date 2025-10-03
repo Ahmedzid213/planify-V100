@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ApplicationLogo from "../Components/ApplicationLogo";
 import Dropdown from "../Components/Dropdown";
 import NavLink from "../Components/NavLink";
 import ResponsiveNavLink from "../Components/ResponsiveNavLink";
@@ -8,6 +7,7 @@ import { Link } from "@inertiajs/react";
 export default function AuthenticatedLayout({ user, header, children }) {
   const [showingNavigationDropdown, setShowingNavigationDropdown] =
     useState(false);
+  const links = buildNavigationLinks(user);
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
@@ -25,105 +25,22 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 >
                   <img
                     src="/images/logo.jpg"
-                    alt="App Logo"
+                    alt="Logo de l'application"
                     className="h-10 w-auto"
                   />
                 </Link>
               </div>
 
-              {/* NAV LINKS SECTION: Corrected structure and classes */}
               <div className="hidden sm:ms-10 sm:flex sm:items-center sm:gap-8">
-                {user.role !== "admin" && (
+                {links.map((link) => (
                   <NavLink
-                    href={route("dashboard")}
-                    active={route().current("dashboard")}
+                    key={`desktop-${link.label}`}
+                    href={link.href}
+                    active={link.active}
                   >
-                    Dashboard
+                    {link.label}
                   </NavLink>
-                )}
-
-                {user.role === "admin" && (
-                  <>
-                    <NavLink
-                      href={route("user.index")}
-                      active={route().current("user.index")}
-                    >
-                      Utilisateurs
-                    </NavLink>
-                    <NavLink
-                      href={route("equipement.index")}
-                      active={route().current("equipement.index")}
-                    >
-                      Équipements
-                    </NavLink>
-                  </>
-                )}
-
-                {user.role === "technicien" && (
-                  <NavLink
-                    href={route("technician.tasks.index")}
-                    active={route().current("technician.tasks.*")}
-                  >
-                    Mes Tâches
-                  </NavLink>
-                )}
-
-                {user.role === "technical manager" && (
-                  <>
-                    <NavLink
-                      href={route("project.index")}
-                      active={route().current("project.index")}
-                    >
-                      Projets
-                    </NavLink>
-                    <NavLink
-                      href={route("technical-manager.tasks.index")}
-                      active={route().current("technical-manager.tasks.*")}
-                    >
-                      Toutes les Tâches
-                    </NavLink>
-                    <NavLink
-                      href={route("equipement.assignment.index")}
-                      active={route().current("equipement.assignment.index")}
-                    >
-                      assignations Équipements
-                    </NavLink>
-                  </>
-                )}
-
-                {user.is_project_manager && (
-                  <>
-                    <NavLink
-                      href={route("my-projects.index")}
-                      active={route().current("my-projects.*")}
-                    >
-                      My Projects
-                    </NavLink>
-                    <NavLink
-                      href={route("project-manager.tasks.index")}
-                      active={route().current("project-manager.tasks.*")}
-                    >
-                      Tasks
-                    </NavLink>
-                  </>
-                )}
-
-                {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE 👇 */}
-                {user.role !== "admin" && (
-                  <NavLink
-                    href={route("notifications.index")}
-                    active={route().current("notifications.index")}
-                  >
-                    Notifications
-                  </NavLink>
-                )}
-
-                <NavLink
-                  href={route("about")}
-                  active={route().current("about")}
-                >
-                  À Propos
-                </NavLink>
+                ))}
               </div>
             </div>
 
@@ -134,7 +51,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                     <span className="inline-flex rounded-md">
                       <button
                         type="button"
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150"
+                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-300 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-200 focus:outline-none transition ease-in-out duration-150"
                       >
                         {user.name}
                         <svg
@@ -158,7 +75,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                       method="post"
                       as="button"
                     >
-                      Se Déconnecter
+                      Se deconnecter
                     </Dropdown.Link>
                   </Dropdown.Content>
                 </Dropdown>
@@ -172,7 +89,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                     (previousState) => !previousState
                   )
                 }
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition ease-in-out duration-150"
               >
                 <svg
                   className="h-6 w-6"
@@ -210,24 +127,15 @@ export default function AuthenticatedLayout({ user, header, children }) {
           }
         >
           <div className="pt-2 pb-3 space-y-1">
-            {/* 👇 HIDE DASHBOARD FROM ADMIN HERE (MOBILE VIEW) 👇 */}
-            {user.role !== "admin" && (
+            {links.map((link) => (
               <ResponsiveNavLink
-                href={route("dashboard")}
-                active={route().current("dashboard")}
+                key={`mobile-${link.label}`}
+                href={link.href}
+                active={link.active}
               >
-                Dashboard
+                {link.label}
               </ResponsiveNavLink>
-            )}
-            {/* 👇 HIDE NOTIFICATIONS FROM ADMIN HERE (MOBILE VIEW) 👇 */}
-            {user.role !== "admin" && (
-              <ResponsiveNavLink
-                href={route("notifications.index")}
-                active={route().current("notifications.index")}
-              >
-                Notifications
-              </ResponsiveNavLink>
-            )}
+            ))}
           </div>
           <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div className="px-4">
@@ -244,7 +152,7 @@ export default function AuthenticatedLayout({ user, header, children }) {
                 href={route("logout")}
                 as="button"
               >
-                Se Déconnecter
+                Se deconnecter
               </ResponsiveNavLink>
             </div>
           </div>
@@ -262,4 +170,90 @@ export default function AuthenticatedLayout({ user, header, children }) {
       <main>{children}</main>
     </div>
   );
+}
+
+function buildNavigationLinks(user) {
+  const items = [];
+
+  if (user.role !== "admin") {
+    items.push({
+      label: "Tableau de bord",
+      href: route("dashboard"),
+      active: route().current("dashboard"),
+    });
+  }
+
+  if (user.role === "admin") {
+    items.push(
+      {
+        label: "Utilisateurs",
+        href: route("user.index"),
+        active: route().current("user.index"),
+      },
+      {
+        label: "Equipements",
+        href: route("equipement.index"),
+        active: route().current("equipement.index"),
+      }
+    );
+  }
+
+  if (user.role === "technicien") {
+    items.push({
+      label: "Mes taches",
+      href: route("technician.tasks.index"),
+      active: route().current("technician.tasks.*"),
+    });
+  }
+
+  if (user.role === "technical manager") {
+    items.push(
+      {
+        label: "Projets",
+        href: route("project.index"),
+        active: route().current("project.index"),
+      },
+      {
+        label: "Toutes les taches",
+        href: route("technical-manager.tasks.index"),
+        active: route().current("technical-manager.tasks.*"),
+      },
+      {
+        label: "Assignations d'equipements",
+        href: route("equipement.assignment.index"),
+        active: route().current("equipement.assignment.index"),
+      }
+    );
+  }
+
+  if (user.is_project_manager) {
+    items.push(
+      {
+        label: "Mes projets",
+        href: route("my-projects.index"),
+        active: route().current("my-projects.*"),
+      },
+      {
+        label: "Taches",
+        href: route("project-manager.tasks.index"),
+        active: route().current("project-manager.tasks.*"),
+      }
+    );
+  }
+
+  if (user.role !== "admin") {
+    items.push({
+      label: "Notifications",
+      href: route("notifications.index"),
+      active: route().current("notifications.index"),
+    });
+  }
+
+  items.push({
+    label: "A propos",
+    href: route("about"),
+    active: route().current("about"),
+  });
+
+  return items;
 }
