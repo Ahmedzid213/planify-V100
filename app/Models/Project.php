@@ -46,7 +46,16 @@ class Project extends Model
     }
 
     public function manager()
+<<<<<<< HEAD
     {
         return $this->belongsTo(User::class, 'project_manager_id');
+=======
+{
+return $this->belongsTo(User::class, 'project_manager_id');
+}
+public function files()
+    {
+        return $this->morphMany(File::class, 'fileable');
+>>>>>>> de514085834f03fb9afa34d9fc265c4e77b2b377
     }
 }

@@ -102,7 +102,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load(['manager', 'createdBy', 'updatedBy']);
+        $project->load(['manager', 'createdBy', 'updatedBy', 'files']);
+        
 
         $query = $project->tasks();
 
