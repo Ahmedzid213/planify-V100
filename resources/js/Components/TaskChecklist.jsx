@@ -17,6 +17,17 @@ export default function TaskChecklist({ task, authUser }) {
     setItems(task.checklists ?? []);
   }, [task.id, serializedChecklists]);
 
+  const elevatedRoles = ["technical manager", "admin"];
+  const assignedUserId = task.assigned_user_id ?? task.assignedUser?.id;
+  const isProjectManager = Boolean(authUser) &&
+    (task.project?.project_manager_id === authUser.id ||
+      task.project?.manager?.id === authUser.id);
+  const isAssignedUser = Boolean(authUser) && assignedUserId === authUser.id;
+  const hasElevatedRole = Boolean(authUser) && elevatedRoles.includes(authUser.role);
+
+  const canToggle = Boolean(authUser) && (isProjectManager || isAssignedUser || hasElevatedRole);
+  const canEditStructure = Boolean(authUser) && isProjectManager;
+
   const completionSummary = useMemo(() => {
     if (!items.length) {
       return "No items";
@@ -25,22 +36,6 @@ export default function TaskChecklist({ task, authUser }) {
     const completed = items.filter((item) => item.is_checked).length;
     return `${completed} / ${items.length} done`;
   }, [items]);
-
-  const canManage = useMemo(() => {
-    if (!authUser) {
-      return false;
-    }
-
-    const elevatedRoles = ["technical manager", "admin"];
-    const isElevated = elevatedRoles.includes(authUser.role);
-    const isProjectManager =
-      task.project?.project_manager_id === authUser.id ||
-      task.project?.manager?.id === authUser.id;
-    const assignedUserId = task.assigned_user_id ?? task.assignedUser?.id;
-    const isAssignedUser = assignedUserId === authUser.id;
-
-    return isElevated || isProjectManager || isAssignedUser;
-  }, [authUser, task]);
 
   const updateBusyIds = (updater) => {
     setBusyIds((previous) => {
@@ -52,6 +47,11 @@ export default function TaskChecklist({ task, authUser }) {
 
   const handleAddItem = async (event) => {
     event.preventDefault();
+
+    if (!canEditStructure) {
+      setFormError("Only the project manager can add checklist items.");
+      return;
+    }
 
     const label = newLabel.trim();
 
@@ -81,7 +81,7 @@ export default function TaskChecklist({ task, authUser }) {
   };
 
   const handleToggle = async (item) => {
-    if (!canManage || busyIds.has(item.id)) {
+    if (!canToggle || busyIds.has(item.id)) {
       return;
     }
 
@@ -125,7 +125,7 @@ export default function TaskChecklist({ task, authUser }) {
   };
 
   const handleDelete = async (item) => {
-    if (!canManage || busyIds.has(item.id)) {
+    if (!canEditStructure || busyIds.has(item.id)) {
       return;
     }
 
@@ -185,8 +185,8 @@ export default function TaskChecklist({ task, authUser }) {
                     <Checkbox
                       checked={Boolean(item.is_checked)}
                       onChange={() => handleToggle(item)}
-                      disabled={!canManage || isBusy}
-                      className={!canManage ? "cursor-default" : "cursor-pointer"}
+                      disabled={!canToggle || isBusy}
+                      className={!canToggle ? "cursor-default" : "cursor-pointer"}
                     />
                     <span
                       className={`text-sm leading-6 text-gray-700 dark:text-gray-200 ${
@@ -197,7 +197,7 @@ export default function TaskChecklist({ task, authUser }) {
                     </span>
                   </label>
 
-                  {canManage && (
+                  {canEditStructure && (
                     <button
                       type="button"
                       onClick={() => handleDelete(item)}
@@ -230,7 +230,7 @@ export default function TaskChecklist({ task, authUser }) {
           </p>
         )}
 
-        {canManage && (
+        {canEditStructure && (
           <form className="flex flex-col gap-3 sm:flex-row" onSubmit={handleAddItem}>
             <input
               type="text"

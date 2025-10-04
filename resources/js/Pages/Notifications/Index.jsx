@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, Link } from "@inertiajs/react";
 
 export default function Index({ auth, notifications }) {
   return (
@@ -24,22 +24,22 @@ export default function Index({ auth, notifications }) {
               ) : (
                 <ul>
                   {notifications.map((notification) => (
-                    <li key={notification.id} className="border-b last:border-b-0 py-4">
+                    <li key={notification.id} className="border-b last:border-b-0 py-4 space-y-1">
                       {notification.type === "new_project" && (
                         <p>
-                          Nouveau projet créé : <strong>{notification.data.project_name}</strong>
+                          Nouveau projet cree : <strong>{notification.data.project_name}</strong>
                         </p>
                       )}
 
                       {notification.type === "new_task" && (
                         <p>
-                          Nouvelle tâche créée : <strong>{notification.data.task_name}</strong>
+                          Nouvelle tache creee : <strong>{notification.data.task_name}</strong>
                         </p>
                       )}
 
                       {notification.type === "task_assigned" && (
                         <p>
-                          Tâche assignée : <strong>{notification.data.task_name}</strong>
+                          tache Assignee : <strong>{notification.data.task_name}</strong>
                           {notification.data.project_name && (
                             <span className="text-sm text-gray-500">
                               {" (Projet : " + notification.data.project_name + ")"}
@@ -48,7 +48,25 @@ export default function Index({ auth, notifications }) {
                         </p>
                       )}
 
-                      <span className="text-xs text-gray-500">
+                      {notification.type === "checklist_completed" && (
+                        <p>
+                          Checklist completee :
+                          <strong className="mx-1">{notification.data.task_name}</strong>
+                          par <strong>{notification.data.completed_by}</strong>
+                          {notification.data.task_id && (
+                            <span className="ml-2 text-sm text-emerald-500">
+                              <Link
+                                href={route("project-manager.tasks.show", notification.data.task_id)}
+                                className="hover:underline"
+                              >
+                                Voir la tache
+                              </Link>
+                            </span>
+                          )}
+                        </p>
+                      )}
+
+                      <span className="block text-xs text-gray-500">
                         {new Date(notification.created_at).toLocaleString()}
                       </span>
                     </li>
