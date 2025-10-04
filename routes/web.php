@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ChecklistItemController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EquipementController;
 use App\Http\Controllers\EquipementAssignmentController;
@@ -34,6 +35,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/files', [FileController::class, 'store'])->name('file.store');
     Route::delete('/files/{file}', [FileController::class, 'destroy'])->name('file.destroy');
+    Route::prefix('tasks/{task}/checklists')->name('tasks.checklists.')->group(function () {
+        Route::post('/', [ChecklistItemController::class, 'store'])->name('store');
+        Route::patch('/{checklistItem}', [ChecklistItemController::class, 'update'])->name('update');
+        Route::delete('/{checklistItem}', [ChecklistItemController::class, 'destroy'])->name('destroy');
+    });
 
     // Profile (accessible to all authenticated users)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

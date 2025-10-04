@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import TaskChecklist from "@/Components/TaskChecklist";
 import { Head, Link, router } from "@inertiajs/react";
 import {
   TASK_PRIORITY_CLASS_MAP,
@@ -10,7 +11,12 @@ import FileUpload from "@/Components/FileUpload";
 import FileCard from "@/Components/FileCard";
 
 export default function Show({ auth, task }) {
-  const taskData = task.data;
+  const taskData = task?.data ?? task;
+
+  const statusClass = TASK_STATUS_CLASS_MAP[taskData.status] ?? "bg-gray-500";
+  const statusLabel = TASK_STATUS_TEXT_MAP[taskData.status] ?? taskData.status;
+  const priorityClass = TASK_PRIORITY_CLASS_MAP[taskData.priority] ?? "bg-gray-500";
+  const priorityLabel = TASK_PRIORITY_TEXT_MAP[taskData.priority] ?? taskData.priority;
 
   const handleDelete = (file) => {
     if (confirm("Are you sure you want to delete this file?")) {
@@ -32,118 +38,96 @@ export default function Show({ auth, task }) {
             href={route("task.edit", taskData.id)}
             className="bg-emerald-500 py-1 px-3 text-white rounded shadow transition-all hover:bg-emerald-600"
           >
-            Editer
+            Edit
           </Link>
         </div>
       }
     >
-      <Head title={`Task "${taskData.name}"`} />
+      <Head title={`Task - ${taskData.name}`} />
       <div className="py-12">
         <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div>
-              <img
-                src={taskData.image_path}
-                alt=""
-                className="w-full h-64 object-cover"
-              />
-            </div>
-            <div className="p-6 text-gray-900 dark:text-gray-100">
-              <div className="grid gap-1 grid-cols-2 mt-2">
-                <div>
+            {taskData.image_path && (
+              <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+                <img
+                  src={taskData.image_path}
+                  alt="Task cover"
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            )}
+            <div className="p-6 text-gray-900 dark:text-gray-100 space-y-6">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div className="space-y-4">
                   <div>
-                    <label className="font-bold text-lg">ID de la tÃ¢che</label>
-                    <p className="mt-1">{taskData.id}</p>
+                    <p className="text-xs uppercase text-gray-500">Task ID</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.id}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">Nom de la tÃ¢che</label>
-                    <p className="mt-1">{taskData.name}</p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Name</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.name}</p>
                   </div>
-
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      Statut de la tÃ¢che
-                    </label>
-                    <p className="mt-1">
-                      <span
-                        className={
-                          "px-2 py-1 rounded text-white " +
-                          TASK_STATUS_CLASS_MAP[taskData.status]
-                        }
-                      >
-                        {TASK_STATUS_TEXT_MAP[taskData.status]}
-                      </span>
-                    </p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Status</p>
+                    <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${statusClass}`}>
+                      {statusLabel}
+                    </span>
                   </div>
-
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      PrioritÃ© de la tÃ¢che
-                    </label>
-                    <p className="mt-1">
-                      <span
-                        className={
-                          "px-2 py-1 rounded text-white " +
-                          TASK_PRIORITY_CLASS_MAP[taskData.priority]
-                        }
-                      >
-                        {TASK_PRIORITY_TEXT_MAP[taskData.priority]}
-                      </span>
-                    </p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Priority</p>
+                    <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${priorityClass}`}>
+                      {priorityLabel}
+                    </span>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">CrÃ©Ã© par</label>
-                    <p className="mt-1">{taskData.createdBy.name}</p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Created by</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.createdBy?.name ?? "Unknown"}</p>
                   </div>
                 </div>
-                <div>
+                <div className="space-y-4">
                   <div>
-                    <label className="font-bold text-lg">Date d'Ã©chÃ©ance</label>
-                    <p className="mt-1">{taskData.due_date}</p>
+                    <p className="text-xs uppercase text-gray-500">Due date</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.due_date ?? "Not set"}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      Date de crÃ©ation
-                    </label>
-                    <p className="mt-1">{taskData.created_at}</p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Created on</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.created_at}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">ModifiÃ© par</label>
-                    <p className="mt-1">{taskData.updatedBy.name}</p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Last updated by</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.updatedBy?.name ?? "Unknown"}</p>
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">Projet</label>
-                    <p className="mt-1">
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Project</p>
+                    {taskData.project ? (
                       <Link
                         href={route("project.show", taskData.project.id)}
-                        className="hover:underline"
+                        className="text-lg font-medium text-emerald-600 hover:text-emerald-500"
                       >
                         {taskData.project.name}
                       </Link>
-                    </p>
+                    ) : (
+                      <p className="mt-1 text-lg font-medium">Unknown</p>
+                    )}
                   </div>
-                  <div className="mt-4">
-                    <label className="font-bold text-lg">
-                      Utilisateur assignÃ©
-                    </label>
-                    <p className="mt-1">{taskData.assignedUser.name}</p>
+                  <div>
+                    <p className="text-xs uppercase text-gray-500">Assigned user</p>
+                    <p className="mt-1 text-lg font-medium">{taskData.assignedUser?.name ?? "Unassigned"}</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-4">
-                <label className="font-bold text-lg">
-                  Description de la tÃ¢che
-                </label>
-                <p className="mt-1">{taskData.description}</p>
+              <div>
+                <p className="text-xs uppercase text-gray-500">Description</p>
+                <p className="mt-2 leading-relaxed">{taskData.description || "No description provided."}</p>
               </div>
             </div>
           </div>
 
+          <TaskChecklist task={taskData} authUser={auth.user} />
+
           <div className="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-              Files
-            </h3>
+            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Files</h3>
             <div className="mt-6 space-y-4">
               {taskData.files &&
                 taskData.files.map((file) => (
@@ -159,4 +143,3 @@ export default function Show({ auth, task }) {
     </AuthenticatedLayout>
   );
 }
-

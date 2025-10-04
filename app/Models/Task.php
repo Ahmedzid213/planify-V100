@@ -41,8 +41,15 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
     public function files()
     {
         return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function checklists()
+    {
+        return $this->hasMany(ChecklistItem::class)
+            ->orderBy('created_at');
     }
 }

@@ -45,7 +45,13 @@ class TechnicianTaskController extends Controller
     {
         abort_if($task->assigned_user_id !== Auth::id(), 404);
 
-        $task->load(['project.manager', 'assignedUser', 'createdBy', 'updatedBy']);
+        $task->load([
+            'project.manager',
+            'assignedUser',
+            'createdBy',
+            'updatedBy',
+            'checklists' => fn ($query) => $query->orderBy('created_at'),
+        ]);
 
         return Inertia::render('TechnicianTasks/Show', [
             'task' => new TaskResource($task),

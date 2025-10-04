@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import TaskChecklist from "@/Components/TaskChecklist";
 import {
   TASK_PRIORITY_CLASS_MAP,
   TASK_PRIORITY_TEXT_MAP,
@@ -25,16 +26,16 @@ export default function Show({ auth, task }) {
             href={route("technician.tasks.index")}
             className="inline-flex items-center gap-2 text-sm text-emerald-600 hover:text-emerald-500"
           >
-            <span aria-hidden>←</span>
-            Retour
+            <span aria-hidden>&larr;</span>
+            Back
           </Link>
         </div>
       }
     >
-      <Head title={`Ma tâche · ${task.name}`} />
+      <Head title={`Task - ${task.name}`} />
 
       <div className="py-12">
-        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             {task.image_path && (
               <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4">
@@ -44,7 +45,7 @@ export default function Show({ auth, task }) {
                   rel="noopener noreferrer"
                   className="text-emerald-600 hover:text-emerald-500"
                 >
-                  Télécharger la pièce jointe
+                  Download attachment
                 </a>
               </div>
             )}
@@ -52,17 +53,17 @@ export default function Show({ auth, task }) {
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Projet</p>
-                    <p className="text-lg font-medium">{task.project?.name ?? "—"}</p>
+                    <p className="text-xs uppercase text-gray-500">Project</p>
+                    <p className="text-lg font-medium">{task.project?.name ?? "Unknown"}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Statut</p>
+                    <p className="text-xs uppercase text-gray-500">Status</p>
                     <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${statusClass}`}>
                       {statusLabel}
                     </span>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Priorité</p>
+                    <p className="text-xs uppercase text-gray-500">Priority</p>
                     <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${priorityClass}`}>
                       {priorityLabel}
                     </span>
@@ -71,26 +72,28 @@ export default function Show({ auth, task }) {
 
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Échéance</p>
-                    <p className="text-lg font-medium">{task.due_date ?? "Non définie"}</p>
+                    <p className="text-xs uppercase text-gray-500">Due date</p>
+                    <p className="text-lg font-medium">{task.due_date ?? "Not set"}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Créée par</p>
-                    <p className="text-lg font-medium">{task.createdBy?.name ?? "—"}</p>
+                    <p className="text-xs uppercase text-gray-500">Created by</p>
+                    <p className="text-lg font-medium">{task.createdBy?.name ?? "Unknown"}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Chef de projet</p>
-                    <p className="text-lg font-medium">{task.project?.manager?.name ?? "—"}</p>
+                    <p className="text-xs uppercase text-gray-500">Project manager</p>
+                    <p className="text-lg font-medium">{task.project?.manager?.name ?? "Unknown"}</p>
                   </div>
                 </div>
               </div>
 
               <div>
                 <p className="text-xs uppercase text-gray-500">Description</p>
-                <p className="mt-2 leading-relaxed">{task.description || "Aucune description fournie."}</p>
+                <p className="mt-2 leading-relaxed">{task.description || "No description provided."}</p>
               </div>
             </div>
           </div>
+
+          <TaskChecklist task={task} authUser={auth.user} />
         </div>
       </div>
     </AuthenticatedLayout>

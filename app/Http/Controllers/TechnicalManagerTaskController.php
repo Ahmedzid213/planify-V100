@@ -87,7 +87,13 @@ class TechnicalManagerTaskController extends Controller
 
     public function show(Task $task): Response
     {
-        $task->load(['project.manager', 'assignedUser', 'createdBy', 'updatedBy']);
+        $task->load([
+            'project.manager',
+            'assignedUser',
+            'createdBy',
+            'updatedBy',
+            'checklists' => fn ($query) => $query->orderBy('created_at'),
+        ]);
 
         $isVisible = false;
 

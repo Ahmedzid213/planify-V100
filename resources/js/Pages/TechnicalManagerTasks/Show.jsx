@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import TaskChecklist from "@/Components/TaskChecklist";
 import {
   TASK_PRIORITY_CLASS_MAP,
   TASK_PRIORITY_TEXT_MAP,
@@ -18,14 +19,14 @@ export default function Show({ auth, task }) {
       user={auth.user}
       header={
         <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Tâche "{task.name}"
+          Task "{task.name}"
         </h2>
       }
     >
-      <Head title={`Tâche · ${task.name}`} />
+      <Head title={`Task - ${task.name}`} />
 
       <div className="py-12">
-        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-6">
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             {task.image_path && (
               <div className="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 p-4">
@@ -35,7 +36,7 @@ export default function Show({ auth, task }) {
                   rel="noopener noreferrer"
                   className="text-emerald-600 hover:text-emerald-500"
                 >
-                  Consulter la pièce jointe
+                  View attachment
                 </a>
               </div>
             )}
@@ -43,42 +44,42 @@ export default function Show({ auth, task }) {
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Identifiant</p>
+                    <p className="text-xs uppercase text-gray-500">Task ID</p>
                     <p className="text-lg font-medium">{task.id}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Statut</p>
+                    <p className="text-xs uppercase text-gray-500">Status</p>
                     <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${statusClass}`}>
                       {statusLabel}
                     </span>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Priorité</p>
+                    <p className="text-xs uppercase text-gray-500">Priority</p>
                     <span className={`inline-flex mt-1 px-2 py-1 rounded text-white ${priorityClass}`}>
                       {priorityLabel}
                     </span>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Assignée à</p>
-                    <p className="text-lg font-medium">{task.assignedUser?.name ?? "Non assignée"}</p>
+                    <p className="text-xs uppercase text-gray-500">Assigned to</p>
+                    <p className="text-lg font-medium">{task.assignedUser?.name ?? "Unassigned"}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Date limite</p>
-                    <p className="text-lg font-medium">{task.due_date ?? "Non définie"}</p>
+                    <p className="text-xs uppercase text-gray-500">Due date</p>
+                    <p className="text-lg font-medium">{task.due_date ?? "Not set"}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Créée le</p>
+                    <p className="text-xs uppercase text-gray-500">Created on</p>
                     <p className="text-lg font-medium">{task.created_at}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Créée par</p>
-                    <p className="text-lg font-medium">{task.createdBy?.name ?? "—"}</p>
+                    <p className="text-xs uppercase text-gray-500">Created by</p>
+                    <p className="text-lg font-medium">{task.createdBy?.name ?? "Unknown"}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase text-gray-500">Projet</p>
+                    <p className="text-xs uppercase text-gray-500">Project</p>
                     {task.project ? (
                       <Link
                         href={route("project.show", task.project.id)}
@@ -87,7 +88,7 @@ export default function Show({ auth, task }) {
                         {task.project.name}
                       </Link>
                     ) : (
-                      <p className="text-lg font-medium">—</p>
+                      <p className="text-lg font-medium">Unknown</p>
                     )}
                   </div>
                 </div>
@@ -95,10 +96,12 @@ export default function Show({ auth, task }) {
 
               <div>
                 <p className="text-xs uppercase text-gray-500">Description</p>
-                <p className="mt-2 leading-relaxed">{task.description || "Aucune description fournie."}</p>
+                <p className="mt-2 leading-relaxed">{task.description || "No description provided."}</p>
               </div>
             </div>
           </div>
+
+          <TaskChecklist task={task} authUser={auth.user} />
         </div>
       </div>
     </AuthenticatedLayout>

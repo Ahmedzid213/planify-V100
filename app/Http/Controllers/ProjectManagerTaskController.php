@@ -125,7 +125,13 @@ class ProjectManagerTaskController extends Controller
     {
         $this->ensureTaskBelongsToManager($task, $request->user()->id);
 
-        $task->load(['project.manager', 'assignedUser', 'createdBy', 'updatedBy']);
+        $task->load([
+            'project.manager',
+            'assignedUser',
+            'createdBy',
+            'updatedBy',
+            'checklists' => fn ($query) => $query->orderBy('created_at'),
+        ]);
 
         return Inertia::render('ProjectManagerTasks/Show', [
             'task' => new TaskResource($task),

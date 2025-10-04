@@ -93,7 +93,14 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task->load('files');
+        $task->load([
+            'files',
+            'project.manager',
+            'assignedUser',
+            'createdBy',
+            'updatedBy',
+            'checklists' => fn ($query) => $query->orderBy('created_at'),
+        ]);
         return inertia('Task/Show', [
             'task' => new TaskResource($task),
         ]);

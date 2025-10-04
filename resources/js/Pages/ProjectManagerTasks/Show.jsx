@@ -1,4 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import TaskChecklist from "@/Components/TaskChecklist";
 import {
   TASK_PRIORITY_CLASS_MAP,
   TASK_PRIORITY_TEXT_MAP,
@@ -30,7 +31,7 @@ export default function Show({ auth, task }) {
         </div>
       }
     >
-      <Head title={`Task · ${task.name}`} />
+      <Head title={`Task - ${task.name}`} />
 
       <div className="py-12">
         <div className="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-6">
@@ -68,7 +69,7 @@ export default function Show({ auth, task }) {
                   </div>
                   <div>
                     <p className="text-xs uppercase text-gray-500">Created by</p>
-                    <p className="text-lg font-medium">{task.createdBy?.name ?? "—"}</p>
+                    <p className="text-lg font-medium">{task.createdBy?.name ?? "Unknown"}</p>
                   </div>
                   <div>
                     <p className="text-xs uppercase text-gray-500">Assigned to</p>
@@ -87,7 +88,7 @@ export default function Show({ auth, task }) {
                   </div>
                   <div>
                     <p className="text-xs uppercase text-gray-500">Last updated by</p>
-                    <p className="text-lg font-medium">{task.updatedBy?.name ?? "—"}</p>
+                    <p className="text-lg font-medium">{task.updatedBy?.name ?? "Unknown"}</p>
                   </div>
                   <div>
                     <p className="text-xs uppercase text-gray-500">Project</p>
@@ -99,7 +100,7 @@ export default function Show({ auth, task }) {
                         {task.project.name}
                       </Link>
                     ) : (
-                      <p className="text-lg font-medium">—</p>
+                      <p className="text-lg font-medium">Unknown</p>
                     )}
                   </div>
                 </div>
@@ -111,6 +112,8 @@ export default function Show({ auth, task }) {
               </div>
             </div>
           </div>
+
+          <TaskChecklist task={task} authUser={auth.user} />
         </div>
       </div>
     </AuthenticatedLayout>
