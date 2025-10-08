@@ -3,7 +3,6 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import GuestLayout from "@/Layouts/GuestLayout";
 
 export default function About({ auth }) {
-  // Choose the layout based on whether the user is logged in
   const Layout = auth.user ? AuthenticatedLayout : GuestLayout;
 
   return (
@@ -31,13 +30,9 @@ export default function About({ auth }) {
                 différence.
               </p>
 
-              {/* Team Member Cards */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                {/* Replace with your actual team member info */}
                 <div className="text-center">
-                  <div className="w-32 h-32 rounded-full mx-auto mb-4 bg-gray-300 dark:bg-gray-700">
-                    {/* You can place an <img /> tag here */}
-                  </div>
+                  <div className="w-32 h-32 rounded-full mx-auto mb-4 bg-gray-300 dark:bg-gray-700"></div>
                   <h3 className="text-xl font-semibold">ZID AHMED</h3>
                   <p className="text-gray-500 dark:text-gray-400">
                     FULL STACK Developer
@@ -52,7 +47,6 @@ export default function About({ auth }) {
                 </div>
               </div>
 
-              {/* Our Mission Section */}
               <div className="mt-16">
                 <h2 className="text-2xl font-bold mb-4 text-center">
                   Notre Mission
@@ -64,7 +58,7 @@ export default function About({ auth }) {
                   bons outils, toute Ã©quipe peut accomplir des choses
                   incroyables.
                 </p>
-                {/* Follow Us Section */}
+
                 <div className="mt-16">
                   <h2 className="text-2xl font-bold mb-4 text-center">
                     NOS REPOSITOIRES GITHUB

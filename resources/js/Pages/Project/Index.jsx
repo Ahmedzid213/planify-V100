@@ -15,7 +15,7 @@ export default function Index({
   managers,
   queryParams = null,
   success,
-  pageTitle = "Projets", // Ã¢Å“â€¦ Default title is "Projets"
+  pageTitle = "Projets",
 }) {
   queryParams = queryParams || {};
 
@@ -25,7 +25,7 @@ export default function Index({
     } else {
       delete queryParams[name];
     }
-    // Ã¢Å“â€¦ Use the current page's URL for filtering
+
     router.get(window.location.pathname, queryParams);
   };
 
@@ -146,7 +146,9 @@ export default function Index({
                       </TableHeading>
                       <th className="px-4 py-3 whitespace-nowrap">Créé par</th>
                       <th className="px-4 py-3 whitespace-nowrap">Manager</th>
-                      <th className="px-4 py-3 whitespace-nowrap text-right">Actions</th>
+                      <th className="px-4 py-3 whitespace-nowrap text-right">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   {/* Filtres */}
@@ -211,7 +213,9 @@ export default function Index({
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                         key={project.id}
                       >
-                        <td className="px-4 py-2 whitespace-nowrap">{project.id}</td>
+                        <td className="px-4 py-2 whitespace-nowrap">
+                          {project.id}
+                        </td>
                         <td className="px-4 py-2 whitespace-nowrap">
                           <img src={project.image_path} style={{ width: 60 }} />
                         </td>
